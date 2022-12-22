@@ -17,7 +17,7 @@ import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import QuizScreen from '../screens/QuizScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
-import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
+import { HomeParamList, RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -105,7 +105,7 @@ function HomeNavigator() {
   return (
     <HomeStack.Navigator>
       <HomeStack.Screen 
-        name="Home" 
+        name="HomeScreen" 
         component={HomeScreen}
         options={{
           headerTitle: 'Home',

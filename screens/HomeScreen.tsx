@@ -5,8 +5,8 @@ import TopArtistsHome from '../components/TopArtistsHome';
 import topArtistsData from '../data/topArtistsData';
 import PlayComponent from '../components/PlayComponent';
 
-export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
-// export default function HomeScreen() {
+// export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
+export default function HomeScreen() {
 
   return (
     <>
