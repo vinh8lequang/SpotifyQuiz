@@ -15,6 +15,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
+import QuizScreen from '../screens/QuizScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -64,9 +65,11 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="Home"
-        component={HomeScreen}
+        component={HomeNavigator}
         options={({ navigation }: RootTabScreenProps<'Home'>) => ({
-          title: 'Home',
+          title: 'Homey',
+          // here to turn on the header with modal. Idea: put in instructions maybe
+          headerShown: false,
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="gamepad-square" size={30} style={{ marginBottom: -3 }} color={color} />,
           headerRight: () => (
             <Pressable
@@ -96,12 +99,28 @@ function BottomTabNavigator() {
   );
 }
 
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+const HomeStack = createNativeStackNavigator<HomeParamList>();
+
+function HomeNavigator() {
+  return (
+    <HomeStack.Navigator>
+      <HomeStack.Screen 
+        name="Home" 
+        component={HomeScreen}
+        options={{
+          headerTitle: 'Home',
+          // headerShown: false,
+        }}
+        />
+
+      <HomeStack.Screen 
+        name="QuizScreen" 
+        component={QuizScreen}
+        options={{
+          headerTitle: 'Quiz',
+          // headerShown: false,
+        }}
+        />
+    </HomeStack.Navigator>
+  )
 }
