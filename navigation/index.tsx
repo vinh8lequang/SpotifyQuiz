@@ -16,6 +16,7 @@ import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import HomeScreen from '../screens/HomeScreen';
 import QuizScreen from '../screens/QuizScreen';
+import LoginScreen from '../screens/LoginScreen';
 import TabTwoScreen from '../screens/TabTwoScreen';
 import { HomeParamList, RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
@@ -64,10 +65,10 @@ function BottomTabNavigator() {
         tabBarActiveTintColor: Colors[colorScheme].tint,
       }}>
       <BottomTab.Screen
-        name="Home"
+        name="Login" //used to be Home
         component={HomeNavigator}
-        options={({ navigation }: RootTabScreenProps<'Home'>) => ({
-          title: 'Homey',
+        options={({ navigation }: RootTabScreenProps<'Login'>) => ({ //used to be RootTabScreenProps<'Home'>
+          title: 'Home',
           // here to turn on the header with modal. Idea: put in instructions maybe
           headerShown: false,
           tabBarIcon: ({ color }) => <MaterialCommunityIcons name="gamepad-square" size={30} style={{ marginBottom: -3 }} color={color} />,
@@ -104,6 +105,15 @@ const HomeStack = createNativeStackNavigator<HomeParamList>();
 function HomeNavigator() {
   return (
     <HomeStack.Navigator>
+      <HomeStack.Screen 
+        name="LoginScreen" 
+        component={LoginScreen}
+        options={{
+          headerTitle: 'Login',
+          headerShown: false,
+        }}
+        />
+
       <HomeStack.Screen 
         name="HomeScreen" 
         component={HomeScreen}

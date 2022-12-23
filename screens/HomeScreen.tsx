@@ -1,5 +1,5 @@
 import { Button, StyleSheet } from 'react-native';
-import { Text, View } from '../components/Themed';
+import { View, Text } from "react-native";
 import { RootTabScreenProps } from '../types';
 import TopArtistsHome from '../components/TopArtistsHome';
 import topArtistsData from '../data/topArtistsData';
