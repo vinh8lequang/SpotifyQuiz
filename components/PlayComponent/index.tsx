@@ -3,27 +3,18 @@ import React from "react";
 import { View, Button } from "react-native";
 // import styles from "./styles";
 
-
 const ArtistHome = () => {
+  const navigation = useNavigation();
 
-    const navigation = useNavigation();
+  const onPressPlay = () => {
+    navigation.navigate("QuizScreen");
+  };
 
-    const onPressPlay = () => {
-      navigation.navigate('QuizScreen')
-    }
-
-    return (
+  return (
     <View>
-        <Button
-        onPress={onPressPlay}
-        title="Play"
-        color="white"
-      />
+      <Button onPress={onPressPlay} title="Play" color="white" />
     </View>
-    )
-}
-
-
-
+  );
+};
 
 export default ArtistHome;

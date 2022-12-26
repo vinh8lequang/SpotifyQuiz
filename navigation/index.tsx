@@ -33,6 +33,8 @@ import {
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import { useEffect, useState } from "react";
+import { getData } from "../utils/storage";
 
 export default function Navigation({
   colorScheme,
@@ -146,25 +148,40 @@ function BottomTabNavigator() {
 const HomeStack = createNativeStackNavigator<HomeParamList>();
 
 function HomeNavigator() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  useEffect(() => {
+    fetchUser();
+  }, []);
+  const fetchUser = async () => {
+    const user = await getData("@access_token");
+    if (!user) {
+      setIsAuthenticated(false);
+    } else {
+      setIsAuthenticated(true);
+    }
+  };
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen
-        name="LoginScreen"
-        component={LoginScreen}
-        options={{
-          headerTitle: "Login",
-          headerShown: false,
-        }}
-      />
-
-      <HomeStack.Screen
-        name="HomeScreen"
-        component={HomeScreen}
-        options={{
-          headerTitle: "Home",
-          // headerShown: false,
-        }}
-      />
+      {!isAuthenticated ? (
+        <HomeStack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{
+            headerTitle: "Login",
+            headerShown: false,
+          }}
+        />
+      ) : (
+        <HomeStack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{
+            headerTitle: "Home",
+            // headerShown: false,
+            headerBackVisible: false,
+          }}
+        />
+      )}
 
       <HomeStack.Screen
         name="QuizScreen"

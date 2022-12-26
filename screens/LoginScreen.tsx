@@ -3,10 +3,14 @@ import { View, TouchableOpacity, Dimensions, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import { ResponseType, useAuthRequest } from "expo-auth-session";
 import { useEffect } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { storeData } from "../utils/storage";
+import { useDispatch } from "react-redux";
+import { getCurrentUser } from "../redux/slices/user";
+import { useNavigation } from "@react-navigation/native";
 const { width: wWidth, height: wHeight } = Dimensions.get("window");
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }: any) => {
+  const dispatch = useDispatch();
   const discovery = {
     authorizationEndpoint: "https://accounts.spotify.com/authorize",
     tokenEndpoint: "https://accounts.spotify.com/api/token",
@@ -48,17 +52,11 @@ const LoginScreen = () => {
     if (response?.type === "success") {
       const { access_token } = response.params;
       console.log("accessToken", access_token);
-      storeData(access_token);
+      storeData("@access_token", access_token);
+      dispatch(getCurrentUser(access_token));
+      navigation.navigate("HomeScreen");
     }
   }, [response]);
-
-  const storeData = async (token: string) => {
-    try {
-      await AsyncStorage.setItem("@access_token", token);
-    } catch (e) {
-      console.log("Error", e);
-    }
-  };
 
   return (
     <View style={styles.containter}>
