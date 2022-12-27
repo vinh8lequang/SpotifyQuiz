@@ -47,8 +47,8 @@ export const getCurrentUser = (access_token: string) => {
         },
       };
       const response = await axios(config);
-      storeData("@userData", JSON.stringify(response.data));
-      storeData("@userId", response.data.id);
+      storeData("@user_data", JSON.stringify(response.data));
+      storeData("@user_id", response.data.id);
       getUserSuccess(response.data);
       return response.data;
     } catch (error) {

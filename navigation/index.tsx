@@ -183,6 +183,25 @@ function HomeNavigator() {
         />
       )}
 
+      {/* <HomeStack.Screen
+        name="LoginScreen"
+        component={LoginScreen}
+        options={{
+          headerTitle: "Login",
+          headerShown: false,
+        }}
+      />
+
+      <HomeStack.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          headerTitle: "Home",
+          // headerShown: false,
+          headerBackVisible: false,
+        }}
+      /> */}
+
       <HomeStack.Screen
         name="QuizScreen"
         component={QuizScreen}
