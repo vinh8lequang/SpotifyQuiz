@@ -162,7 +162,7 @@ function HomeNavigator() {
   };
   return (
     <HomeStack.Navigator>
-      {!isAuthenticated ? (
+      {/* {!isAuthenticated ? (
         <HomeStack.Screen
           name="LoginScreen"
           component={LoginScreen}
@@ -181,9 +181,9 @@ function HomeNavigator() {
             headerBackVisible: false,
           }}
         />
-      )}
+      )} */}
 
-      {/* <HomeStack.Screen
+      <HomeStack.Screen
         name="LoginScreen"
         component={LoginScreen}
         options={{
@@ -200,7 +200,7 @@ function HomeNavigator() {
           // headerShown: false,
           headerBackVisible: false,
         }}
-      /> */}
+      />
 
       <HomeStack.Screen
         name="QuizScreen"

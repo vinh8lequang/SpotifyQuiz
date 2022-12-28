@@ -63,6 +63,7 @@ export const fetchTopUserArtists = createAsyncThunk(
     // console.log("ImageUri:", response.data.items[0].images[0].url);
     // console.log("NameArtist:", response.data.items[1].name);
     // console.log("ImageUri:", response.data.items[1].images[0].url);
+
     // console.log("Debug------------------------------");
     // response.data.items.forEach((item: any) => {
     //   console.log("ArtistId:", item.id);
