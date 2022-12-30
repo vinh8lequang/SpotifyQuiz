@@ -1,0 +1,25 @@
+https://developer.spotify.com/documentation/web-api/reference/#/
+
+ALBUMS
+-Which of these albums is NOT from the artist
+-In what date was this album realeased
+-Which of these albums is from the artist
+-How many tracks does this album have
+
+TRACKS 
+-which of these traks is from the artist
+-Which of these tracks doesnt below to the album
+-Which of these tracks below to the album
+
+ARTISTS
+-Who is this artist (photo)
+-When did this artist realeased his first song?
+
+MONTHLY LISTENERS
+-To the nearest amount, what is the number of monthly listeners of the artist
+
+FIRST GENRE OF ARTIST
+
+
+
+

@@ -82,7 +82,7 @@ const albums = createSlice({
         "Content-Type": "application/json",
       },
       params: {
-        limit: 6,
+        limit: 20,
         time_range: "medium_term",
       },
     };
@@ -105,7 +105,7 @@ export const fetchAlbum = createAsyncThunk(
     });
     const token = await getData("@access_token");
     // console.log("Token", token);
-    var  i = getInt(0, 5);
+    var  i = getInt(0, 19);
     const url = 	'https://api.spotify.com/v1/artists/'+artists.items[i].id+'/albums'
     const config: AxiosRequestConfig = {
       url: url,
@@ -130,8 +130,8 @@ export const fetchAlbum = createAsyncThunk(
       })
     })
 
-    var  j = getInt(0, 5);
-    if(i==j && i==5){j=i-1}
+    var  j = getInt(0, 19);
+    if(i==j && i==19){j=i-1}
     if(i==j){j=i+1}
     const url2 = 	'https://api.spotify.com/v1/artists/'+artists.items[j].id+'/albums'
     const config2: AxiosRequestConfig = {
@@ -149,6 +149,7 @@ export const fetchAlbum = createAsyncThunk(
     const response2 = await axios(config2);
     response2.data.items.forEach((item: any) => {
       res.push({
+        artists:artists.items[j].name,
         id: item.id,
         release_date: item.release_date,
         imageUri: item.images[0].url,
