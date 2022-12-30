@@ -19,8 +19,8 @@ const LoginScreen = ({ navigation }: any) => {
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: "8642ecf50be54c2a8364aa5468cfc026",
-      clientSecret: "b906d73f00764c7abee0aba9546533d1",
+      clientId: "fedd082c6f404c478a8653a73819d2e6",
+      clientSecret: "eedba51259ca450bb63a7cbfb04e5a97",
       scopes: [
         "ugc-image-upload",
         "user-read-playback-state",
@@ -43,7 +43,7 @@ const LoginScreen = ({ navigation }: any) => {
         "user-follow-modify",
       ],
       usePKCE: false,
-      redirectUri: "exp://192.168.178.48:19000",
+      redirectUri: "exp://192.168.1.161:19000",
     },
     discovery
   );

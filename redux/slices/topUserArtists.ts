@@ -70,6 +70,14 @@ export const fetchTopUserArtists = createAsyncThunk(
     //   console.log("ArtistName:", item.name);
     //   console.log("ImageUri:", item.images[0].url);
     // });
-    return response.data;
+    var res =[]
+    response.data.items.forEach((item: any) => {
+      res.push({
+        id: item.id,
+        imageUri: item.images[0].url,
+        artistName: item.name,
+      })
+    })
+    return res;
   }
 );

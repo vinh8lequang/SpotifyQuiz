@@ -1,6 +1,28 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
+      containerLifes: {
+    flexDirection: "row-reverse",
+    marginTop: 15,
+    marginLeft: 10,
+    marginBottom: 0,
+  },
+  lifeActive: {
+    height: 17,
+    width: 17,
+    color: "red",
+    marginBottom: 0,
+  },
+  lifeLoss: {
+    height: 17,
+    width: 17,
+    marginBottom: 0,
+  },
+  score: {
+    marginRight: 100,
+    fontWeight: "bold",
+    color: 'white',
+  },
     container: {
         flexDirection: "column",
         justifyContent: "center",
@@ -8,7 +30,7 @@ const styles = StyleSheet.create({
     },
     QuestionText:{
         marginTop: 20,
-        color: 'black',
+        color: 'white',
         fontSize: 17,
         textAlign: 'center',
         fontWeight: "bold"

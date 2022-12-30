@@ -4,4 +4,7 @@ export const apiEndpoints = {
   getUserTopArtists: () => {
     return `${BASE_URL}/me/top/artists`;
   },
+  getAlbums: () => {
+    return `${BASE_URL}/me/top/artists`;
+  },
 };
