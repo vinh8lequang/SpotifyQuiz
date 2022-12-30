@@ -13,23 +13,8 @@ import styles from "./styles";
 
 export default function QuizScreen() {
 
-  var initialState={
-    
-                question: '' ,
-                answers:[
-                    '',
-                    '',
-                    '',
-                    '',
-
-                ],
-                correct:'',
-                image:'https://img.freepik.com/premium-vector/system-software-update-upgrade-concept-loading-process-screen-vector-illustration_175838-2182.jpg?w=2000'
-
-            }
-
   const [lifes, setLifes] = useState(3);
-  const [question, setQuestion] = useState(initialState);
+  const [question, setQuestion] = useState('loading');
   const[score,setScore] = useState(0);
   const dispatch = useDispatch();
   const { data } = useSelector(albumsSelector);
@@ -58,17 +43,21 @@ export default function QuizScreen() {
 
   useEffect( () => {
     dispatch(fetchAlbum());
-    
-    console.log("Debug------------------------------");
-
-    setQuestion(generateQuestion(data));
+    while(question == 'loading'){
+      if(data){
+        setQuestion(generateQuestion(data));
+        break;
+      }
+      
+    }
   },[]);
 
 
 
 
-
+if(question !='loading'){
   return (
+  
     <View>
       <View style={styles.containerLifes}>
         <AntDesign name="heart" style={(lifes > 0) ? styles.lifeActive :styles.lifeLoss}></AntDesign>
@@ -87,4 +76,7 @@ export default function QuizScreen() {
       <Text style={{ color: "white", fontSize: 30 }}></Text>
     </View>
   );
+
+}
+  
 }
