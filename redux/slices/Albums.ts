@@ -17,7 +17,37 @@ interface Albums{
 
 const initialState: Albums = {
   isLoading: false,
-  data: [],
+  data: [{
+        artist:'',
+        id: '',
+        release_date: '',
+        imageUri: 'https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/loading-screen-featured-image.jpg',
+        albumName: '',
+  },
+{
+        id: '',
+        release_date: '',
+        imageUri: 'https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/loading-screen-featured-image.jpg',
+        albumName: '',
+  },
+{
+        id: '',
+        release_date: '',
+        imageUri: 'https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/loading-screen-featured-image.jpg',
+        albumName: '',
+  },
+{
+        id: '',
+        release_date: '',
+        imageUri: 'https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/loading-screen-featured-image.jpg',
+        albumName: '',
+  },
+{
+        id: '',
+        release_date: '',
+        imageUri: 'https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/loading-screen-featured-image.jpg',
+        albumName: '',
+  }],
   isError: false,
 };
 
