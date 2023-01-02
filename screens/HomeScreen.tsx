@@ -16,10 +16,10 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function HomeScreen() {
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector(topUserArtistsSelector);
-  const{data:data2}= useSelector(topTracksSelector)
-  useEffect( () => {
+  const { data: data2 } = useSelector(topTracksSelector);
+  useEffect(() => {
     dispatch(fetchTopUserArtists());
-    dispatch(fetchTopTracks())
+    dispatch(fetchTopTracks());
   }, []);
 
   if (isLoading) {
@@ -31,34 +31,34 @@ export default function HomeScreen() {
   }
 
   return (
-    <ScrollView>
-      <View style={styles.topArtistsContainer}>
+    <View style={styles.parentContainer}>
+      <View style={styles.topMediaContainer}>
         <TopArtistsHome title="Your top artists" artists={data} />
       </View>
-      <View style={styles.bottomContainer}>
+      <View style={styles.buttonContainer}>
         <PlayComponent />
       </View>
-      <View style={styles.topArtistsContainer}>
+      <View style={styles.topMediaContainer}>
         <TopArtistsHome title="Your top tracks" artists={data2} />
       </View>
-
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  topArtistsContainer: {
-    flex:1,
-   
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor:'#2C3333',
-    borderRadius:15,
+  topMediaContainer: {
+    flex: 1,
+    // height: "auto",
+    backgroundColor: "#2E2E2E",
+    borderRadius: 15,
+    margin: 5,
   },
-  bottomContainer: {
-
-    marginVertical:15,
-    marginHorizontal:10
-  
+  buttonContainer: {
+    // flex: 1,
+    // marginVertical: 15,
+    marginHorizontal: 15,
+  },
+  parentContainer: {
+    flex: 1,
   },
 });

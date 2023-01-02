@@ -36,41 +36,37 @@ const topTracks = createSlice({
   },
 });
 
-export const topTracksSelector = (state: RootState) =>
-  state.topTracks;
+export const topTracksSelector = (state: RootState) => state.topTracks;
 export default topTracks.reducer;
 
-export const fetchTopTracks = createAsyncThunk(
-  "/user/topTracks",
-  async () => {
-    const token = await getData("@access_token");
-    // console.log("Token", token);
-    const url = apiEndpoints.getTracks();
-    const config: AxiosRequestConfig = {
-      url: url,
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      params: {
-        limit: 6,
-        time_range: "medium_term",
-      },
-    };
-    const response = await axios(config);
+export const fetchTopTracks = createAsyncThunk("/user/topTracks", async () => {
+  const token = await getData("@access_token");
+  // console.log("Token", token);
+  const url = apiEndpoints.getTracks();
+  const config: AxiosRequestConfig = {
+    url: url,
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    params: {
+      limit: 12,
+      time_range: "medium_term",
+    },
+  };
+  const response = await axios(config);
 
-    var res =[]
-    response.data.items.forEach((item: any) => {
-      res.push({
-        id: item.id,
-        imageUri:item.album.images[0].url,
-        artistName: item.name,
-      })
-    })
+  var res = [];
+  response.data.items.forEach((item: any) => {
+    res.push({
+      id: item.id,
+      imageUri: item.album.images[0].url,
+      artistName: item.name,
+    });
+  });
 
-    console.log(res);
-    storeData("@topTracks", JSON.stringify(res));
-    return res;
-  }
-);
+  console.log(res);
+  storeData("@topTracks", JSON.stringify(res));
+  return res;
+});
