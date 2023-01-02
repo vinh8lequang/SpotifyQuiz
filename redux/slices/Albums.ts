@@ -4,10 +4,15 @@ import axios, { AxiosRequestConfig } from "axios";
 import { RootState } from "..";
 import { apiEndpoints } from "../../services/api";
 import getInt from "../../services/getRandomInt";
+import { shuffle } from "../../services/getRandomInt";
+import { storeData } from "../../utils/storage";
+import { getInt2 } from "../../services/getRandomInt";
 
+const NUMARTIST = 10;
+const NUMALBUMS = 10
+const NUMALBUMS2= 6;
 
-
-
+var lastArtist= ''
 
 interface Albums{
   isLoading: boolean;
@@ -15,9 +20,12 @@ interface Albums{
   isError: boolean;
 }
 
+//DECLARE INITIAL STATE OF THE DATA
+
 const initialState: Albums = {
   isLoading: false,
   data: [{
+        artistImage:'https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/loading-screen-featured-image.jpg',
         artist:'',
         id: '',
         release_date: '',
@@ -51,6 +59,9 @@ const initialState: Albums = {
   isError: false,
 };
 
+//CREATE THE SLICE AND SET THE REDUCERS
+
+
 const albums = createSlice({
   name: "albums",
   initialState: initialState,
@@ -70,43 +81,22 @@ const albums = createSlice({
   },
 });
 
-  const getArtist = async () => {
-    const token = await getData("@access_token");
-    // console.log("Token", token);
-    const url = apiEndpoints.getUserTopArtists();
-    const config: AxiosRequestConfig = {
-      url: url,
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      params: {
-        limit: 20,
-        time_range: "medium_term",
-      },
-    };
-    const response = await axios(config);
-    return response.data;
-  }
-
 export const albumsSelector = (state: RootState) =>state.albums;
 
 export default albums.reducer;
 
+
+//GET THE ALBUMS
+
 export const fetchAlbum = createAsyncThunk(
   "/user/albums",
   async () => {
-    const artists = await getArtist()
-   // console.log(artists.items[0].name)
+    var artists = await getData("@topArtis");
+    artists = JSON.parse(artists)
     var res =[]
-    artists.items.forEach((item: any) => {
-      
-    });
     const token = await getData("@access_token");
-    // console.log("Token", token);
-    var  i = getInt(0, 19);
-    const url = 	'https://api.spotify.com/v1/artists/'+artists.items[i].id+'/albums'
+    var  i = getInt(0, NUMARTIST);
+    const url = 	'https://api.spotify.com/v1/artists/'+artists[i].id+'/albums'
     const config: AxiosRequestConfig = {
       url: url,
       method: "GET",
@@ -115,25 +105,30 @@ export const fetchAlbum = createAsyncThunk(
         "Content-Type": "application/json",
       },
       params: {
-        limit: 4,
+        limit: NUMALBUMS,
         time_range: "medium_term",
       },
     };
     const response = await axios(config);
-    response.data.items.forEach((item: any) => {
+    var p= []
+    for(var h=0;h<NUMALBUMS;h++){
+      p.push(h)
+    }
+    p  = shuffle(p);
+    for(var j = 0;j<4;j++){
       res.push({
-        artists:artists.items[i].name,
-        id: item.id,
-        release_date: item.release_date,
-        imageUri: item.images[0].url,
-        albumName: item.name,
+        artistsImage:artists[i].imageUri,
+        artists: artists[i].artistName,
+        id: response.data.items[p[j]].id,
+        release_date:  response.data.items[p[j]].release_date,
+        imageUri:  response.data.items[p[j]].images[0].url,
+        albumName:  response.data.items[p[j]].name,
       })
-    })
+    }
+    
 
-    var  j = getInt(0, 19);
-    if(i==j && i==19){j=i-1}
-    if(i==j){j=i+1}
-    const url2 = 	'https://api.spotify.com/v1/artists/'+artists.items[j].id+'/albums'
+    var  j = getInt2(0, NUMARTIST,i)
+    const url2 = 	'https://api.spotify.com/v1/artists/'+artists[j].id+'/albums'
     const config2: AxiosRequestConfig = {
       url: url2,
       method: "GET",
@@ -142,22 +137,28 @@ export const fetchAlbum = createAsyncThunk(
         "Content-Type": "application/json",
       },
       params: {
-        limit: 1,
+        limit: 5,
         time_range: "medium_term",
       },
     };
     const response2 = await axios(config2);
-    response2.data.items.forEach((item: any) => {
-      res.push({
-        artists:artists.items[j].name,
-        id: item.id,
-        release_date: item.release_date,
-        imageUri: item.images[0].url,
-        albumName: item.name,
-      })
-    })
+    var p= []
+    for(var h=0;h<NUMALBUMS2;h++){
+      p.push(h)
+    }
+    p  = shuffle(p);
 
-    //console.log(res)
+      res.push({
+        artistsImage:artists[j].imageUri,
+        artists:artists[j].artistName,
+        id: response2.data.items[p[0]].id,
+        release_date: response2.data.items[p[0]].release_date,
+        imageUri:  response2.data.items[p[0]].images[0].url,
+        albumName:  response2.data.items[p[0]].name,
+      })
+    
+      storeData("@albums", JSON.stringify(res));
+    
 
     return res;}
 

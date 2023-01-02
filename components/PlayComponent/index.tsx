@@ -12,7 +12,7 @@ const ArtistHome = () => {
 
   return (
     <View>
-      <Button onPress={onPressPlay} title="Play" color="white" />
+      <Button onPress={onPressPlay} title="Play" color="grey"/>
     </View>
   );
 };

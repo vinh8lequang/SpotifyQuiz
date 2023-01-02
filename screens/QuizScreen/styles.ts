@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     height: 17,
     width: 17,
     marginBottom: 0,
+    color:'#7F8487'
   },
   score: {
     marginRight: 100,
@@ -53,6 +54,27 @@ const styles = StyleSheet.create({
         marginTop: 15,
         borderRadius: 10,
         backgroundColor:"white",
+        height: 55,
+        marginHorizontal: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+    ,
+        buttonCorrect:{
+        width: 360,
+        marginTop: 15,
+        borderRadius: 10,
+        backgroundColor:"#ADE792",
+        height: 55,
+        marginHorizontal: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+        buttonIncorrect:{
+        width: 360,
+        marginTop: 15,
+        borderRadius: 10,
+        backgroundColor:"#DC3535",
         height: 55,
         marginHorizontal: 15,
         alignItems: 'center',
