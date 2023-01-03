@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ScrollView, Dimensions } from "react-native";
+import { View, Text, ActivityIndicator, Dimensions } from "react-native";
 import { Image, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { albumsSelector, fetchAlbum } from "../../redux/slices/Albums";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   generateQuestionAlbum,
   generateQuestionTrack,
@@ -16,6 +15,7 @@ import { useNavigation } from "@react-navigation/native";
 import { getData, storeData } from "../../utils/storage";
 
 export default function QuizScreen() {
+  //get the height dimension to fit all phone devices
   const [screenHeight, setScreenHeight] = useState(
     Dimensions.get("window").height
   );
@@ -57,9 +57,16 @@ export default function QuizScreen() {
   const [color, setColor] = useState(initialColors);
   const [alter, setAlter] = useState(false);
   const dispatch = useDispatch();
-  const { data } = useSelector(albumsSelector);
+  const { data, isLoading } = useSelector(albumsSelector);
   const { data: data2 } = useSelector(tracksSelector);
   const navigation = useNavigation();
+
+  // const [isLoadingLocal, setIsLoadingLocal] = useState(true);
+  // setTimeout(() => {
+  //   setIsLoadingLocal(false);
+  // }, 500);
+
+  // console.log("isLoading albums", isLoading);
 
   function onResponse(e: any, f: any) {
     if (e == question.correct) {
@@ -110,6 +117,7 @@ export default function QuizScreen() {
     setQuestion(generateQuestionAlbum(data));
   }, []);
 
+  //comparing and updating highscore
   const compareAndUpdateHighScore = async (newScore: number) => {
     const currentHighScore = await getData("@highScore");
     if (currentHighScore === null || newScore > parseInt(currentHighScore)) {
@@ -127,6 +135,14 @@ export default function QuizScreen() {
     };
     update();
   }, [score]);
+
+  // if (isLoadingLocal) {
+  //   return (
+  //     <View style={{ flex: 1 }}>
+  //       <ActivityIndicator size="large" />
+  //     </View>
+  //   );
+  // }
 
   if (lifes > 0) {
     return (
@@ -204,7 +220,7 @@ export default function QuizScreen() {
           style={styles.image}
         />
         <Text style={styles.questionText}>
-          SORRY YOU HAVE LOST ALL YOUR LIFES
+          SORRY YOU HAVE LOST ALL YOUR LIVES
         </Text>
         <Text style={styles.scoresText}>Current score: {score}</Text>
         <Text style={styles.scoresText}>High score: {highScore}</Text>

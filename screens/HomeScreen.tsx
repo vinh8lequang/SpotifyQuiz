@@ -9,6 +9,8 @@ import {
 } from "../redux/slices/topUserArtists";
 import { useSelector } from "react-redux";
 import { fetchTopTracks, topTracksSelector } from "../redux/slices/topTracks";
+import { fetchAlbum } from "../redux/slices/Albums";
+import { fetchTracks } from "../redux/slices/tracks";
 import { getData, storeData } from "../utils/storage";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 
@@ -31,6 +33,12 @@ export default function HomeScreen() {
     //fetching data from Spotify API
     dispatch(fetchTopUserArtists());
     dispatch(fetchTopTracks());
+
+    //In order to fix a bug of quiz first load
+    dispatch(fetchAlbum());
+    dispatch(fetchAlbum());
+    dispatch(fetchTracks());
+    dispatch(fetchTracks());
 
     // clearHighScore();
   }, []);
@@ -79,9 +87,6 @@ export default function HomeScreen() {
         <Text style={styles.highScoreText}>High Score:</Text>
         <Text style={styles.highScoreNumber}>{highScore}</Text>
       </View>
-      {/* <View style={styles.topMediaContainer}>
-        <TopArtistsHome title="Your top tracks" artists={data2} />
-      </View> */}
     </View>
   );
 }
