@@ -39,11 +39,19 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   questionText: {
-    marginTop: 20,
+    marginVertical: 25,
+    marginHorizontal: 15,
     color: "white",
     fontSize: 17,
     textAlign: "center",
     fontWeight: "bold",
+  },
+  scoresText: {
+    marginBottom: 5,
+    marginHorizontal: 15,
+    color: "white",
+    fontSize: 20,
+    textAlign: "center",
   },
   image: {
     marginTop: 20,

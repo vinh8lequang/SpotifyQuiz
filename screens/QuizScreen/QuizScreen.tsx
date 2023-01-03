@@ -204,10 +204,10 @@ export default function QuizScreen() {
           style={styles.image}
         />
         <Text style={styles.questionText}>
-          SORRY YO HAVE LOST ALL YOUR LIFES
+          SORRY YOU HAVE LOST ALL YOUR LIFES
         </Text>
-        <Text style={styles.questionText}>Current score: {score}</Text>
-        <Text style={styles.questionText}>High score: {highScore}</Text>
+        <Text style={styles.scoresText}>Current score: {score}</Text>
+        <Text style={styles.scoresText}>High score: {highScore}</Text>
         <View>
           <Pressable
             style={styles.button}
