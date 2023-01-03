@@ -1,9 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { View, Button } from "react-native";
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
 // import styles from "./styles";
 
-const ArtistHome = () => {
+const PlayComponent = () => {
   const navigation = useNavigation();
 
   const onPressPlay = () => {
@@ -11,10 +11,27 @@ const ArtistHome = () => {
   };
 
   return (
-    <View>
-      <Button onPress={onPressPlay} title="Play" color="grey" />
-    </View>
+    <TouchableOpacity onPress={onPressPlay}>
+      <View style={styles.container}>
+        <Text style={styles.playText}>Play</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 
-export default ArtistHome;
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#1a9645",
+    borderRadius: 15,
+    padding: 10,
+    alignItems: "center",
+  },
+  playText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});
+
+export default PlayComponent;

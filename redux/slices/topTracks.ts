@@ -51,7 +51,7 @@ export const fetchTopTracks = createAsyncThunk("/user/topTracks", async () => {
       "Content-Type": "application/json",
     },
     params: {
-      limit: 12,
+      limit: 6,
       time_range: "medium_term",
     },
   };

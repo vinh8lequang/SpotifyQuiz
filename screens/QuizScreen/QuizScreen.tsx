@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, ScrollView, Dimensions } from "react-native";
 import { Image, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { albumsSelector, fetchAlbum } from "../../redux/slices/Albums";
@@ -10,12 +10,31 @@ import {
   generateQuestionTrack,
 } from "../../services/questionManager";
 import styles from "./styles";
-import { ScrollView } from "react-native-gesture-handler";
 import { fetchTracks, tracksSelector } from "../../redux/slices/tracks";
 import getInt from "../../services/getRandomInt";
 import { useNavigation } from "@react-navigation/native";
+import { getData, storeData } from "../../utils/storage";
 
 export default function QuizScreen() {
+  const [screenHeight, setScreenHeight] = useState(
+    Dimensions.get("window").height
+  );
+
+  useEffect(() => {
+    const onChange = (result: {
+      window: { width: number; height: number };
+    }) => {
+      setScreenHeight(result.window.height);
+    };
+    const removeChangeListener = Dimensions.addEventListener(
+      "change",
+      onChange
+    );
+    return () => {
+      removeChangeListener.remove();
+    };
+  }, []);
+
   var initialState = {
     question: "",
     answers: ["", "", "", ""],
@@ -34,6 +53,7 @@ export default function QuizScreen() {
   const [lifes, setLifes] = useState(3);
   const [question, setQuestion] = useState(initialState);
   const [score, setScore] = useState(0);
+  const [highScore, setHighScore] = useState(0);
   const [color, setColor] = useState(initialColors);
   const [alter, setAlter] = useState(false);
   const dispatch = useDispatch();
@@ -41,7 +61,7 @@ export default function QuizScreen() {
   const { data: data2 } = useSelector(tracksSelector);
   const navigation = useNavigation();
 
-  function onResponse(e, f) {
+  function onResponse(e: any, f: any) {
     if (e == question.correct) {
       var c = color;
       c[f] = styles.buttonCorrect;
@@ -90,35 +110,60 @@ export default function QuizScreen() {
     setQuestion(generateQuestionAlbum(data));
   }, []);
 
+  const compareAndUpdateHighScore = async (newScore: number) => {
+    const currentHighScore = await getData("@highScore");
+    if (currentHighScore === null || newScore > parseInt(currentHighScore)) {
+      await storeData("@highScore", newScore.toString());
+    }
+    //Debug
+    const highScoreFetched = await getData("@highScore");
+    console.log("Score", newScore);
+    console.log("HighScoreFromFetch", highScoreFetched);
+    setHighScore(highScoreFetched);
+  };
+  useEffect(() => {
+    const update = async () => {
+      await compareAndUpdateHighScore(score);
+    };
+    update();
+  }, [score]);
+
   if (lifes > 0) {
     return (
-      <View>
-        <View style={styles.containerLifes}>
-          <AntDesign
-            name="heart"
-            style={lifes > 0 ? styles.lifeActive : styles.lifeLoss}
-          ></AntDesign>
-          <AntDesign
-            name="heart"
-            style={lifes > 1 ? styles.lifeActive : styles.lifeLoss}
-          ></AntDesign>
-          <AntDesign
-            name="heart"
-            style={lifes > 2 ? styles.lifeActive : styles.lifeLoss}
-          ></AntDesign>
+      <View style={styles.parentContainer}>
+        <View style={styles.containerScoreandLives}>
+          <View style={styles.containerLives}>
+            <AntDesign
+              name="heart"
+              style={lifes > 0 ? styles.lifeActive : styles.lifeLoss}
+            ></AntDesign>
+            <AntDesign
+              name="heart"
+              style={lifes > 1 ? styles.lifeActive : styles.lifeLoss}
+            ></AntDesign>
+            <AntDesign
+              name="heart"
+              style={lifes > 2 ? styles.lifeActive : styles.lifeLoss}
+            ></AntDesign>
+          </View>
           <Text style={styles.score}>{"Score: " + score}</Text>
         </View>
         <View style={styles.container}>
           <Image source={{ uri: question.image }} style={styles.image} />
-          <Text style={styles.QuestionText}>{question.question}</Text>
-          <ScrollView>
+          <Text style={styles.questionText}>{question.question}</Text>
+          <View
+            style={[
+              styles.answersContainer,
+              { height: screenHeight - screenHeight * 0.6 },
+            ]}
+          >
             <Pressable
               style={color[0]}
               onPress={() => {
                 onResponse(question.answers[3], 0);
               }}
             >
-              <Text style={styles.textAwnser}>{question.answers[3]}</Text>
+              <Text style={styles.textAnswer}>{question.answers[3]}</Text>
             </Pressable>
             <Pressable
               style={color[1]}
@@ -126,7 +171,7 @@ export default function QuizScreen() {
                 onResponse(question.answers[2], 1);
               }}
             >
-              <Text style={styles.textAwnser}>{question.answers[2]}</Text>
+              <Text style={styles.textAnswer}>{question.answers[2]}</Text>
             </Pressable>
             <Pressable
               style={color[2]}
@@ -134,7 +179,7 @@ export default function QuizScreen() {
                 onResponse(question.answers[1], 2);
               }}
             >
-              <Text style={styles.textAwnser}>{question.answers[1]}</Text>
+              <Text style={styles.textAnswer}>{question.answers[1]}</Text>
             </Pressable>
             <Pressable
               style={color[3]}
@@ -142,9 +187,9 @@ export default function QuizScreen() {
                 onResponse(question.answers[0], 3);
               }}
             >
-              <Text style={styles.textAwnser}>{question.answers[0]}</Text>
+              <Text style={styles.textAnswer}>{question.answers[0]}</Text>
             </Pressable>
-          </ScrollView>
+          </View>
         </View>
         <Text style={{ color: "white", fontSize: 30 }}></Text>
       </View>
@@ -158,7 +203,11 @@ export default function QuizScreen() {
           }}
           style={styles.image}
         />
-        <Text style={styles.QuestionText}>SORRY YOU LOST ALL YOUR LIFES</Text>
+        <Text style={styles.questionText}>
+          SORRY YO HAVE LOST ALL YOUR LIFES
+        </Text>
+        <Text style={styles.questionText}>Current score: {score}</Text>
+        <Text style={styles.questionText}>High score: {highScore}</Text>
         <View>
           <Pressable
             style={styles.button}

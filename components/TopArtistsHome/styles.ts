@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
   columnWrapper: {
     flexWrap: "wrap",
     flexDirection: "row",
+    justifyContent: "space-evenly",
   },
   title: {
     color: "white",

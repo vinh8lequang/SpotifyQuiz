@@ -1,26 +1,65 @@
-import { ActivityIndicator, Button, StyleSheet } from "react-native";
-import { View } from "react-native";
+import { ActivityIndicator, Text, StyleSheet, View } from "react-native";
 import TopArtistsHome from "../components/TopArtistsHome";
 import PlayComponent from "../components/PlayComponent";
 import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   fetchTopUserArtists,
   topUserArtistsSelector,
 } from "../redux/slices/topUserArtists";
 import { useSelector } from "react-redux";
 import { fetchTopTracks, topTracksSelector } from "../redux/slices/topTracks";
-import { ScrollView } from "react-native-gesture-handler";
+import { getData, storeData } from "../utils/storage";
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 
 // export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const isFocused = useIsFocused();
+
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector(topUserArtistsSelector);
   const { data: data2 } = useSelector(topTracksSelector);
+
+  const [highScore, setHighScore] = useState(0);
+
+  // const clearHighScore = async () => {
+  //   await storeData("@highScore", "0");
+  // };
+
   useEffect(() => {
+    //fetching data from Spotify API
     dispatch(fetchTopUserArtists());
     dispatch(fetchTopTracks());
+
+    // clearHighScore();
   }, []);
+
+  // this useFocus so HomeScreen can be mounted and unmounted properly
+  // it is so high score can be updated when redircted back from game over screen
+  useEffect(() => {
+    const retrieveHighScore = async () => {
+      try {
+        const value = await getData("@highScore");
+        if (value !== null) {
+          // update highScore state variable with value from async storage
+          setHighScore(parseInt(value));
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    if (isFocused) {
+      retrieveHighScore();
+    }
+    const removeFocusListener = navigation.addListener("focus", () => {
+      retrieveHighScore();
+    });
+    return () => {
+      removeFocusListener();
+    };
+  }, [isFocused]);
 
   if (isLoading) {
     return (
@@ -31,34 +70,49 @@ export default function HomeScreen() {
   }
 
   return (
-    <View style={styles.parentContainer}>
-      <View style={styles.topMediaContainer}>
+    <View style={styles.container}>
+      <View style={styles.topHalfContainer}>
         <TopArtistsHome title="Your top artists" artists={data} />
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={styles.bottomHalfContainer}>
         <PlayComponent />
+        <Text style={styles.highScoreText}>High Score:</Text>
+        <Text style={styles.highScoreNumber}>{highScore}</Text>
       </View>
-      <View style={styles.topMediaContainer}>
+      {/* <View style={styles.topMediaContainer}>
         <TopArtistsHome title="Your top tracks" artists={data2} />
-      </View>
+      </View> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  topMediaContainer: {
+  container: {
     flex: 1,
-    // height: "auto",
+  },
+  topHalfContainer: {
+    // flex: 2,
+    height: "50%",
     backgroundColor: "#2E2E2E",
     borderRadius: 15,
     margin: 5,
+    marginVertical: 10,
   },
-  buttonContainer: {
-    // flex: 1,
-    // marginVertical: 15,
+  bottomHalfContainer: {
+    flex: 1,
+    paddingTop: 25,
     marginHorizontal: 15,
   },
-  parentContainer: {
-    flex: 1,
+  highScoreText: {
+    fontSize: 18,
+    marginTop: 10,
+    color: "#FFFFFF",
+    textAlign: "center",
+  },
+  highScoreNumber: {
+    fontSize: 80,
+    marginTop: 10,
+    color: "#FFFFFF",
+    textAlign: "center",
   },
 });
