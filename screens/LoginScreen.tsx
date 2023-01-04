@@ -7,9 +7,20 @@ import { storeData } from "../utils/storage";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../redux/slices/user";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const { width: wWidth, height: wHeight } = Dimensions.get("window");
 
 const LoginScreen = ({ navigation }: any) => {
+  // useEffect(() => {
+  //   AsyncStorage.removeItem("@access_token")
+  //     .then(() => {
+  //       console.log("Access token removed previous session");
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+
   const dispatch = useDispatch();
   const discovery = {
     authorizationEndpoint: "https://accounts.spotify.com/authorize",

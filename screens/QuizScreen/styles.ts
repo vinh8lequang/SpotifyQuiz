@@ -55,11 +55,11 @@ const styles = StyleSheet.create({
   },
   image: {
     marginTop: 10,
-    width: 200,
-    height: 200,
+    // width: 200,
+    // height: 200,
     alignContent: "center",
     justifyContent: "center",
-    borderRadius: 20,
+    // borderRadius: 20,
     alignSelf: "center",
   },
   answersContainer: {

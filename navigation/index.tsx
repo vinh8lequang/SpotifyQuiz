@@ -151,7 +151,13 @@ function HomeNavigator() {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   useEffect(() => {
     fetchUser();
+    // const intervalAuth = setInterval(() => {
+    //   setIsAuthenticated(false);
+    // }, 2000);
+
+    // return () => clearInterval(intervalAuth);
   }, []);
+
   const fetchUser = async () => {
     const user = await getData("@access_token");
     if (!user) {
@@ -160,6 +166,7 @@ function HomeNavigator() {
       setIsAuthenticated(true);
     }
   };
+
   return (
     <HomeStack.Navigator>
       {/* {!isAuthenticated ? (
