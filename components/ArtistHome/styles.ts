@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   text: {
-    fontSize: "10px",
+    fontSize: 10,
     color: "grey",
     marginTop: 3,
     textAlign: "center",
