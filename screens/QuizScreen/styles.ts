@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   image: {
-    marginTop: 20,
+    marginTop: 10,
     width: 200,
     height: 200,
     alignContent: "center",
@@ -63,8 +63,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   answersContainer: {
+    flex: 1,
     margin: 0,
-    justifyContent: "center",
+    justifyContent: "flex-end",
   },
   textAnswer: {
     color: "black",
@@ -75,7 +76,7 @@ const styles = StyleSheet.create({
   // },
   button: {
     width: 360,
-    marginTop: 15,
+    marginTop: 10,
     borderRadius: 10,
     backgroundColor: "#fafafa",
     height: 45,
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
   },
   buttonCorrect: {
     width: 360,
-    marginTop: 15,
+    marginTop: 10,
     borderRadius: 10,
     backgroundColor: "#1bc44b",
     height: 45,
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   },
   buttonIncorrect: {
     width: 360,
-    marginTop: 15,
+    marginTop: 10,
     borderRadius: 10,
     backgroundColor: "#e63946",
     height: 45,

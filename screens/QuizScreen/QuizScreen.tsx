@@ -170,7 +170,7 @@ export default function QuizScreen() {
           <View
             style={[
               styles.answersContainer,
-              { height: screenHeight - screenHeight * 0.6 },
+              { maxHeight: screenHeight - screenHeight * 0.7 },
             ]}
           >
             <Pressable
