@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 const { width: wWidth, height: wHeight } = Dimensions.get("window");
 
-const LoginScreen = ({ navigation }: any) => {
+const Login = ({ navigation }: any) => {
   // useEffect(() => {
   //   AsyncStorage.removeItem("@access_token")
   //     .then(() => {
@@ -70,7 +70,7 @@ const LoginScreen = ({ navigation }: any) => {
       console.log("accessToken", access_token);
       storeData("@access_token", access_token);
       dispatch(getCurrentUser(access_token));
-      navigation.navigate("HomeScreen");
+      navigation.navigate("HomeTab", { screen: "Home" });
     }
   }, [response]);
 
@@ -105,4 +105,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default Login;

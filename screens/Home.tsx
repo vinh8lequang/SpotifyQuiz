@@ -21,9 +21,8 @@ import { getData, storeData } from "../utils/storage";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 import { Audio } from "expo-av";
 
-// export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
-export default function HomeScreen() {
-  const navigation = useNavigation();
+// export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
+const Home = ({ navigation }: any) => {
   const isFocused = useIsFocused();
 
   const dispatch = useDispatch();
@@ -46,11 +45,10 @@ export default function HomeScreen() {
     dispatch(fetchAlbum());
     dispatch(fetchTracks());
     dispatch(fetchTracks());
-
     // clearHighScore();
   }, []);
 
-  // this useFocus so HomeScreen can be mounted and unmounted properly
+  // this useFocus so Home can be mounted and unmounted properly
   // it is so high score can be updated when redircted back from game over screen
   useEffect(() => {
     const retrieveHighScore = async () => {
@@ -96,7 +94,7 @@ export default function HomeScreen() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -128,3 +126,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+export default Home;

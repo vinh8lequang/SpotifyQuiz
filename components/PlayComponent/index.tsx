@@ -7,7 +7,7 @@ const PlayComponent = () => {
   const navigation = useNavigation();
 
   const onPressPlay = () => {
-    navigation.navigate("QuizScreen");
+    navigation.navigate("Quiz");
   };
 
   return (

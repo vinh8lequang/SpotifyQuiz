@@ -14,7 +14,7 @@ import getInt from "../../services/getRandomInt";
 import { useNavigation } from "@react-navigation/native";
 import { getData, storeData } from "../../utils/storage";
 
-export default function QuizScreen() {
+const Quiz = ({ navigation }: any) => {
   //get the height dimension to fit all phone devices
   const [screenHeight, setScreenHeight] = useState(
     Dimensions.get("window").height
@@ -59,7 +59,6 @@ export default function QuizScreen() {
   const dispatch = useDispatch();
   const { data, isLoading } = useSelector(albumsSelector);
   const { data: data2 } = useSelector(tracksSelector);
-  const navigation = useNavigation();
 
   // const [isLoadingLocal, setIsLoadingLocal] = useState(true);
   // setTimeout(() => {
@@ -237,7 +236,7 @@ export default function QuizScreen() {
           <Pressable
             style={styles.button}
             onPress={() => {
-              navigation.navigate("HomeScreen");
+              navigation.navigate("Home");
             }}
           >
             <View>
@@ -259,4 +258,6 @@ export default function QuizScreen() {
       </View>
     );
   }
-}
+};
+
+export default Quiz;
