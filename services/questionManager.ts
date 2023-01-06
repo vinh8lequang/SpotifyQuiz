@@ -27,6 +27,10 @@ export function generateQuestionTrack(data: any) {
         ],
         correct: data[4].trackName,
         image: data[4].artistImage,
+        aux:{
+          artist:data[4].artist,
+          url:data[4].artistImage
+        }
       };
     case 4:
       console.log(data[4].trackName);
@@ -40,6 +44,12 @@ export function generateQuestionTrack(data: any) {
         ],
         correct: data[4].trackName,
         image: data[0].albumImage,
+
+        aux:{
+          artist:data[4].artist,
+          url:data[4].artistImage
+        }
+
       };
     case 5:
       console.log(data[4].trackName);
@@ -53,6 +63,10 @@ export function generateQuestionTrack(data: any) {
         ],
         correct: data[4].trackName,
         image: data[4].albumImage,
+        aux:{
+          artist:data[4].artist,
+          url:data[4].artistImage
+        }
       };
   }
 }
@@ -72,6 +86,11 @@ export function generateQuestionAlbum(data: any) {
         ],
         correct: data[4].albumName,
         image: data[0].artistsImage,
+
+        aux:{
+          artist:data[0].artists,
+          url:data[0].artistsImage
+        }
       };
     case 1:
       return {
@@ -84,6 +103,11 @@ export function generateQuestionAlbum(data: any) {
         ],
         correct: data[4].release_date,
         image: data[4].imageUri,
+
+        aux:{
+          artist:data[4].artists,
+          url:data[4].artistsImage
+        }
       };
     case 2:
       return {
@@ -96,6 +120,10 @@ export function generateQuestionAlbum(data: any) {
         ],
         correct: data[4].albumName,
         image: data[4].artistsImage,
+        aux:{
+          artist:data[4].artists,
+          url:data[4].artistsImage
+        }
       };
   }
 }
