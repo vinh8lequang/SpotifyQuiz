@@ -13,6 +13,7 @@ import { fetchTracks, tracksSelector } from "../../redux/slices/tracks";
 import getInt from "../../services/getRandomInt";
 import { useNavigation } from "@react-navigation/native";
 import { getData, storeData } from "../../utils/storage";
+import relevantArtist from "../../services/RelevantArtist";
 
 export default function QuizScreen() {
   //get the height dimension to fit all phone devices
@@ -41,6 +42,10 @@ export default function QuizScreen() {
     correct: "",
     image:
       "https://img.freepik.com/premium-vector/system-software-update-upgrade-concept-loading-process-screen-vector-illustration_175838-2182.jpg?w=2000",
+    aux:{
+      artist:'',
+      url:''
+    }
   };
 
   var initialColors = [
@@ -73,6 +78,7 @@ export default function QuizScreen() {
       var c = color;
       c[f] = styles.buttonCorrect;
       setColor(c);
+      relevantArtist(question.aux.artist,question.aux.url)
       setTimeout(() => {
         var ns = score + 1;
         setScore(ns);

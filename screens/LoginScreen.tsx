@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../redux/slices/user";
 import { useNavigation } from "@react-navigation/native";
 const { width: wWidth, height: wHeight } = Dimensions.get("window");
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const LoginScreen = ({ navigation }: any) => {
   const dispatch = useDispatch();
   const discovery = {
@@ -21,16 +21,22 @@ const LoginScreen = ({ navigation }: any) => {
   // b906d73f00764c7abee0aba9546533d1
   // exp://192.168.178.48:19000
 
+
+
+  //fedd082c6f404c478a8653a73819d2e6
+  //eedba51259ca450bb63a7cbfb04e5a97
+  //exp://192.168.1.161:19000
+
   const [request, response, promptAsync] = useAuthRequest(
     {
       responseType: ResponseType.Token,
-      clientId: "8642ecf50be54c2a8364aa5468cfc026",
-      clientSecret: "b906d73f00764c7abee0aba9546533d1",
+      clientId: "fedd082c6f404c478a8653a73819d2e6",
+      clientSecret: "eedba51259ca450bb63a7cbfb04e5a97",
       scopes: [
         "ugc-image-upload",
         "user-read-playback-state",
         "user-modify-playback-state",
-        "user-read-currently-playing",
+    //    "user-read-currently-playing",
         "streaming",
         "app-remote-control",
         "user-read-email",
@@ -44,16 +50,17 @@ const LoginScreen = ({ navigation }: any) => {
         "user-top-read",
         "user-read-playback-position",
         "user-read-recently-played",
-        "user-follow-read",
-        "user-follow-modify",
+  //      "user-follow-read",
+ //      "user-follow-modify",
       ],
       usePKCE: false,
-      redirectUri: "exp://192.168.178.48:19000",
+      redirectUri: "exp://192.168.1.161:19000",
     },
     discovery
   );
 
   useEffect(() => {
+  
     if (response?.type === "success") {
       const { access_token } = response.params;
       console.log("accessToken", access_token);
