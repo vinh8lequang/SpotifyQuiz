@@ -59,7 +59,7 @@ const Home = ({ navigation }: any) => {
   }, []);
 
   // this useFocus so Home can be mounted and unmounted properly
-  // it is so high score can be updated when redircted back from game over screen
+  // it is so high score can be updated when redirected back from game over screen
   useEffect(() => {
     const retrieveHighScore = async () => {
       try {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
 import { Audio } from "expo-av";
 
-const SoundFunction = ({ navigation }: any) => {
+const Sound = ({ navigation }: any) => {
   const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -62,4 +62,4 @@ const SoundFunction = ({ navigation }: any) => {
   );
 };
 
-export default SoundFunction;
+export default Sound;
