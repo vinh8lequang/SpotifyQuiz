@@ -1,22 +1,21 @@
 import { types } from "@babel/core";
 import { configureStore } from "@reduxjs/toolkit";
+import thunk from "redux-thunk";
 import userReducer from "./slices/user";
 import topUserArtistsReducer from "./slices/topUserArtists";
 import albumsReducer from "./slices/Albums";
 import tracksReducer from "./slices/tracks";
 import topTracksReducer from "./slices/topTracks";
+
 export const store = configureStore({
   reducer: {
     user: userReducer,
     topUserArtists: topUserArtistsReducer,
     albums: albumsReducer,
-    tracks:tracksReducer,
-    topTracks:topTracksReducer
+    tracks: tracksReducer,
+    topTracks: topTracksReducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+  middleware: [thunk],
 });
 
 export type RootState = ReturnType<typeof store.getState>;

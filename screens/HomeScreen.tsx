@@ -1,4 +1,10 @@
-import { ActivityIndicator, Text, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  StyleSheet,
+  View,
+  Button,
+} from "react-native";
 import TopArtistsHome from "../components/TopArtistsHome";
 import PlayComponent from "../components/PlayComponent";
 import { useDispatch } from "react-redux";
@@ -13,6 +19,7 @@ import { fetchAlbum } from "../redux/slices/Albums";
 import { fetchTracks } from "../redux/slices/tracks";
 import { getData, storeData } from "../utils/storage";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
+import { Audio } from "expo-av";
 
 // export default function HomeScreen({ navigation }: RootTabScreenProps<'Home'>) {
 export default function HomeScreen() {

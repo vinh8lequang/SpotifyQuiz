@@ -171,7 +171,13 @@ export default function QuizScreen() {
           <Text style={styles.score}>{"Score: " + score}</Text>
         </View>
         <View style={styles.container}>
-          <Image source={{ uri: question.image }} style={styles.image} />
+          <Image
+            source={{ uri: question.image }}
+            style={[
+              styles.image,
+              { height: screenHeight * 0.28, width: screenHeight * 0.28 },
+            ]}
+          />
           <Text style={styles.questionText}>{question.question}</Text>
           <View
             style={[
@@ -223,7 +229,10 @@ export default function QuizScreen() {
           source={{
             uri: "https://media1.giphy.com/media/VM01S5yIaKCgqg1bSF/giphy.gif?cid=ecf05e47wsx84h8uxwgbb63qrft1wc6vv3uij6si6micx29r&rid=giphy.gif&ct=g",
           }}
-          style={styles.image}
+          style={[
+            styles.image,
+            { height: screenHeight * 0.28, width: screenHeight * 0.28 },
+          ]}
         />
         <Text style={styles.questionText}>
           SORRY YOU HAVE LOST ALL YOUR LIVES
