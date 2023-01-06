@@ -44,31 +44,31 @@ export default function App() {
                 card: "#141414",
                 text: "#ffffff",
                 border: "#282525",
-                notification: "red",
+                notification: "#1DB954",
               },
             }}
           >
             <Stack.Navigator>
               {/* {!isAuthenticated ? (
-                  <>
-                    <Stack.Screen
-                      options={{ headerShown: false }}
-                      name="Login"
-                      component={Login}
-                    />
-                    <Stack.Screen
-                      options={{ headerShown: false }}
-                      name="HomeTab"
-                      component={TabNavigation}
-                    />
-                  </>
-                ) : (
+                <>
+                  <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="Login"
+                    component={Login}
+                  />
                   <Stack.Screen
                     options={{ headerShown: false }}
                     name="HomeTab"
                     component={TabNavigation}
                   />
-                )} */}
+                </>
+              ) : (
+                <Stack.Screen
+                  options={{ headerShown: false }}
+                  name="HomeTab"
+                  component={TabNavigation}
+                />
+              )} */}
 
               <Stack.Screen
                 options={{ headerShown: false }}

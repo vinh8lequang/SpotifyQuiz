@@ -36,14 +36,25 @@ const Home = ({ navigation }: any) => {
 
   useEffect(() => {
     //fetching data from Spotify API
+    // @ts-ignore
     dispatch(fetchTopUserArtists());
+    // @ts-ignore
     dispatch(fetchTopTracks());
 
     //In order to fix a bug of quiz first load
+    // @ts-ignore
     dispatch(fetchAlbum());
+    // @ts-ignore
     dispatch(fetchAlbum());
+    // @ts-ignore
+    dispatch(fetchAlbum());
+    // @ts-ignore
     dispatch(fetchTracks());
+    // @ts-ignore
     dispatch(fetchTracks());
+    // @ts-ignore
+    dispatch(fetchTracks());
+
     // clearHighScore();
   }, []);
 
@@ -55,6 +66,7 @@ const Home = ({ navigation }: any) => {
         const value = await getData("@highScore");
         if (value !== null) {
           // update highScore state variable with value from async storage
+          // @ts-ignore
           setHighScore(parseInt(value));
         }
       } catch (error) {
@@ -84,6 +96,7 @@ const Home = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <View style={styles.topHalfContainer}>
+        {/* @ts-ignore */}
         <TopArtistsHome title="Your top artists" artists={data} />
       </View>
       <View style={styles.bottomHalfContainer}>
