@@ -97,7 +97,7 @@ const Home = ({ navigation }: any) => {
     <View style={styles.container}>
       <View style={styles.topHalfContainer}>
         {/* @ts-ignore */}
-        <TopArtistsHome title="Your top artists" artists={data} />
+        <TopArtistsHome title="Your most listened artists" artists={data} />
       </View>
       <View style={styles.bottomHalfContainer}>
         <PlayComponent />
@@ -111,6 +111,7 @@ const Home = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 25,
   },
   topHalfContainer: {
     // flex: 2,

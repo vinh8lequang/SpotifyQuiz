@@ -1,11 +1,8 @@
 import { StyleSheet } from "react-native";
-
-import EditScreenInfo from "../components/EditScreenInfo";
 import { Text, View } from "../components/Themed";
-import TopArtistsHome from "../components/TopArtistsHome";
+import TopArtistsStats from "../components/TopArtistsStats";
 import { useEffect, useState } from "react";
 import { getData } from "../utils/storage";
-import { useDispatch } from "react-redux";
 import { useIsFocused } from "@react-navigation/native";
 
 const Stats = ({ navigation }: any) => {
@@ -23,8 +20,9 @@ const Stats = ({ navigation }: any) => {
   useEffect(() => {
     const getArtist = async () => {
       var res = await getData("@relevantArtist");
+      // @ts-ignore
       setArtist(JSON.parse(res));
-      console.log(artist);
+      console.log("Stats", artist);
     };
 
     if (isFocused) {
@@ -40,7 +38,7 @@ const Stats = ({ navigation }: any) => {
 
   return (
     <View style={styles.container}>
-      <TopArtistsHome title="Your Most Known artists" artists={artist} />
+      <TopArtistsStats title="Your Most Known artists" artists={artist} />
     </View>
   );
 };
@@ -50,6 +48,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
   title: {
     fontSize: 20,

@@ -8,3 +8,10 @@ export type ArtistHomeType = {
   imageUri: string;
   artistName: string;
 };
+
+export type ArtistStatsType = {
+  id: string;
+  imageUri: string;
+  artistName: string;
+  puntuation: number;
+};

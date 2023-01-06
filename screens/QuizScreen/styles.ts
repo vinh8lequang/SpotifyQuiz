@@ -3,6 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   parentContainer: {
     flex: 1,
+    paddingTop: 25,
   },
   containerScoreandLives: {
     flexDirection: "row-reverse",
