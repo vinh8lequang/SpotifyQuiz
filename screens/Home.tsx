@@ -18,8 +18,7 @@ import { fetchTopTracks, topTracksSelector } from "../redux/slices/topTracks";
 import { fetchAlbum } from "../redux/slices/Albums";
 import { fetchTracks } from "../redux/slices/tracks";
 import { getData, storeData } from "../utils/storage";
-import { useIsFocused, useNavigation } from "@react-navigation/native";
-import { Audio } from "expo-av";
+import { useIsFocused } from "@react-navigation/native";
 
 // export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 const Home = ({ navigation }: any) => {
