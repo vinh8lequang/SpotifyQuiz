@@ -66,7 +66,7 @@ export const fetchTopTracks = createAsyncThunk("/user/topTracks", async () => {
     });
   });
 
-  console.log(res);
+
   storeData("@topTracks", JSON.stringify(res));
   return res;
 });

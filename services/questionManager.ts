@@ -8,12 +8,15 @@ const questions = [
   "Which one of these tracks IS from the artist ",
   "Which one of these tracks does NOT belong to the album ",
   "Which one of these tracks belong to the album ",
+
+  "What's the name of the song that is playing"
 ];
 
 export function generateQuestionTrack(data: any) {
+  console.log(data)
   var i = getInt(3, 6);
   var p = shuffle([0, 1, 4, 3]);
-  console.log(i + questions[i]);
+  
   switch (i) {
     case 3:
       console.log(data[4].trackName);
@@ -72,6 +75,7 @@ export function generateQuestionTrack(data: any) {
 }
 
 export function generateQuestionAlbum(data: any) {
+  console.log(data)
   var i = getInt(0, 3);
   var p = shuffle([0, 1, 4, 3]);
   switch (i) {
@@ -126,4 +130,28 @@ export function generateQuestionAlbum(data: any) {
         }
       };
   }
+}
+
+
+export function generateSpecialQuestion(data: any){
+  console.log(data)
+   var p = shuffle([0, 1, 4, 3]);
+      return {
+        question: `${questions[6]}`,
+        answers: [
+          data[p[0]].trackName,
+          data[p[1]].trackName,
+          data[p[2]].trackName,
+          data[p[3]].trackName,
+        ],
+        correct: data[4].trackName,
+        image: data[0].artistsImage,
+        previewUrl: data[4].previewUrl,
+
+        aux:{
+          artist:data[0].artists,
+          url:data[0].artistsImage
+        }
+      };
+
 }

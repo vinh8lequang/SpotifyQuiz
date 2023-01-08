@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
 import { Audio } from "expo-av";
 
-const Sound = ({ navigation }: any) => {
+const Sound = ({ navigation }: any,props:any) => {
   const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -15,7 +15,7 @@ const Sound = ({ navigation }: any) => {
   async function playSound() {
     console.log("Loading Sound");
     const { sound } = await Audio.Sound.createAsync({
-      uri: "https://cdn.pixabay.com/download/audio/2022/06/25/audio_4ca472b499.mp3?filename=lofi-vibes-113884.mp3",
+      uri: props.url,
     });
     //@ts-ignore
     setSound(sound);
@@ -52,8 +52,6 @@ const Sound = ({ navigation }: any) => {
 
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text style={{ color: "green", marginVertical: 10 }}>This is stats</Text>
-      <Text style={{ color: "green", marginVertical: 10 }}>Testing sound:</Text>
       {/* <Text onPress={() => navigation.navigate("Home")}>
         Click here to go to "Home"
       </Text> */}

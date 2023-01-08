@@ -162,6 +162,7 @@ export const fetchAlbum = createAsyncThunk("/user/albums", async () => {
   });
 
   storeData("@albums", JSON.stringify(res));
-
+  //console.log(artists[i].artistName)
+  //console.log(artists[j].artistName)
   return res;
 });

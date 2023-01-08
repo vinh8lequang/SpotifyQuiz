@@ -2,6 +2,7 @@ import { getData } from "../utils/storage";
 import { storeData } from "../utils/storage";
 
 const relevantArtist = async(e,f)=>{
+    if(e != undefined ||f != undefined ){
      var artists = await getData("@relevantArtist");
      var found= false
      artists = JSON.parse(artists);
@@ -32,9 +33,12 @@ const relevantArtist = async(e,f)=>{
         }
 
      }
+    //artists= artists.sort(artists.puntuation)
+    console.log(artists.sort(((a, b) => {
+        return a.puntuation < b.puntuation;
+        } )))
 
-     console.log(artists)
      storeData("@relevantArtist", JSON.stringify(artists));
-}
+    }}
 
 export default relevantArtist
