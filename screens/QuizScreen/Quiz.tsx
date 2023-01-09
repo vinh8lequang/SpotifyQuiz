@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, ActivityIndicator, Dimensions,Button } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  Dimensions,
+  Button,
+} from "react-native";
 import { Image, Pressable } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { albumsSelector, fetchAlbum } from "../../redux/slices/Albums";
@@ -37,25 +43,18 @@ const Quiz = ({ navigation }: any) => {
     };
   }, []);
 
-
-
-
-
-
-
-
-
   var initialState = {
     question: "",
     answers: ["", "", "", ""],
     correct: "",
     image:
       "https://img.freepik.com/premium-vector/system-software-update-upgrade-concept-loading-process-screen-vector-illustration_175838-2182.jpg?w=2000",
-      previewUrl:'https://cdn.pixabay.com/download/audio/2022/06/25/audio_4ca472b499.mp3?filename=lofi-vibes-113884.mp3',
-    aux:{
-      artist:'',
-      url:''
-    }
+    previewUrl:
+      "https://cdn.pixabay.com/download/audio/2022/06/25/audio_4ca472b499.mp3?filename=lofi-vibes-113884.mp3",
+    aux: {
+      artist: "",
+      url: "",
+    },
   };
 
   var initialColors = [
@@ -71,7 +70,7 @@ const Quiz = ({ navigation }: any) => {
   const [highScore, setHighScore] = useState(0);
   const [color, setColor] = useState(initialColors);
   const [alter, setAlter] = useState(false);
-  const[specialQuestion,setSpecialQuestion]= useState(0)
+  const [specialQuestion, setSpecialQuestion] = useState(0);
   const [sound, setSound] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -79,26 +78,19 @@ const Quiz = ({ navigation }: any) => {
   const { data, isLoading } = useSelector(albumsSelector);
   const { data: data2 } = useSelector(tracksSelector);
 
+  async function playSound() {
+    console.log("Loading Sound");
+    const { sound } = await Audio.Sound.createAsync({
+      uri: question.previewUrl,
+    });
+    setSound(sound);
 
+    console.log("Playing Sound");
+    await sound.playAsync();
+    setIsPlaying(true);
+  }
 
-
-
-
-
-async function playSound() {
-        console.log("Loading Sound");
-        const { sound } = await Audio.Sound.createAsync({
-        uri: question.previewUrl,
-      });
-      setSound(sound);
-
-      console.log("Playing Sound");
-      await sound.playAsync();
-      setIsPlaying(true);
-      }
-
-
-async function pauseSound() {
+  async function pauseSound() {
     console.log("Pausing Sound");
     //@ts-ignore
     await sound?.pauseAsync();
@@ -113,7 +105,7 @@ async function pauseSound() {
     }
   }
 
-    useEffect(() => {
+  useEffect(() => {
     return sound
       ? () => {
           console.log("Unloading Sound");
@@ -122,14 +114,6 @@ async function pauseSound() {
         }
       : undefined;
   }, [sound]);
-
-
-
-
-
-
-
-
 
   // const [isLoadingLocal, setIsLoadingLocal] = useState(true);
   // setTimeout(() => {
@@ -141,17 +125,17 @@ async function pauseSound() {
   function onResponse(e: any, f: any) {
     var nq = specialQuestion + 1;
     if (e == question.correct) {
-      var ns = score +1
+      var ns = score + 1;
       var c = color;
       c[f] = styles.buttonCorrect;
       setColor(c);
-      relevantArtist(question.aux.artist,question.aux.url)
-      if(specialQuestion==5){
-          nq=0;
-          console.log('reinicio')
-          ns = ns + 2
-          pauseSound();
-        }
+      relevantArtist(question.aux.artist, question.aux.url);
+      if (specialQuestion == 5) {
+        nq = 0;
+        console.log("reinicio");
+        ns = ns + 2;
+        pauseSound();
+      }
       setTimeout(() => {
         setScore(ns);
         setColor(initialColors);
@@ -161,9 +145,9 @@ async function pauseSound() {
       var c = color;
       c[f] = styles.buttonIncorrect;
       setColor(c);
-      if(specialQuestion==5){
-        nq=0;
-        console.log('reinicio')
+      if (specialQuestion == 5) {
+        nq = 0;
+        console.log("reinicio");
         pauseSound();
       }
       setTimeout(() => {
@@ -174,9 +158,7 @@ async function pauseSound() {
       }, 1000);
     }
 
-    if(specialQuestion==4){
-
-
+    if (specialQuestion == 4) {
       dispatch(fetchTracks());
 
       console.log("Debug------SPECIAL--------------");
@@ -184,33 +166,39 @@ async function pauseSound() {
         setQuestion(generateSpecialQuestion(data2));
       }, 1000);
       setAlter(true);
-    }else{
-    if (alter == false) {
-      dispatch(fetchTracks());
-      console.log("Debug------TRACKS--------------");
-      setTimeout(() => {
-        setQuestion(generateQuestionTrack(data2));
-      }, 1000);
-      setAlter(true);
     } else {
-      dispatch(fetchAlbum());
+      if (alter == false) {
+        dispatch(fetchTracks());
+        console.log("Debug------TRACKS--------------");
+        setTimeout(() => {
+          setQuestion(generateQuestionTrack(data2));
+        }, 1000);
+        setAlter(true);
+      } else {
+        dispatch(fetchAlbum());
 
-      console.log("Debug----ALBUMS--------------");
+        console.log("Debug----ALBUMS--------------");
 
-      setTimeout(() => {
-        setQuestion(generateQuestionAlbum(data));
-      }, 1000);
-      setAlter(false);
+        setTimeout(() => {
+          setQuestion(generateQuestionAlbum(data));
+        }, 1000);
+        setAlter(false);
+      }
     }
-    }
-   // console.log(specialQuestion)
-    
-  
+    // console.log(specialQuestion)
   }
 
   useEffect(() => {
-    dispatch(fetchAlbum());
-
+    const fetchDataAlbums = async () => {
+      // @ts-ignore
+      await dispatch(fetchAlbum());
+    };
+    fetchDataAlbums();
+    const fetchDataTracks = async () => {
+      // @ts-ignore
+      await dispatch(fetchTracks());
+    };
+    fetchDataTracks();
     console.log("Debug---------FIRST LOAD-------------");
 
     setQuestion(generateQuestionAlbum(data));
@@ -235,13 +223,13 @@ async function pauseSound() {
     update();
   }, [score]);
 
-  // if (isLoadingLocal) {
-  //   return (
-  //     <View style={{ flex: 1 }}>
-  //       <ActivityIndicator size="large" />
-  //     </View>
-  //   );
-  // }
+  if (!data) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   if (lifes > 0 && specialQuestion != 5) {
     return (
@@ -315,8 +303,8 @@ async function pauseSound() {
         <Text style={{ color: "white", fontSize: 30 }}></Text>
       </View>
     );
-  }else if(lifes > 0 && specialQuestion == 5){ 
-        return (
+  } else if (lifes > 0 && specialQuestion == 5) {
+    return (
       <View style={styles.parentContainer}>
         <View style={styles.containerScoreandLives}>
           <View style={styles.containerLives}>
@@ -336,10 +324,14 @@ async function pauseSound() {
           <Text style={styles.score}>{"Score: " + score}</Text>
         </View>
         <View style={styles.container}>
-
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Button title={isPlaying ? "Pause" : "Play"} onPress={togglePlayback} />
-      </View>
+          <View
+            style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          >
+            <Button
+              title={isPlaying ? "Pause" : "Play"}
+              onPress={togglePlayback}
+            />
+          </View>
           <Text style={styles.questionText}>{question.question}</Text>
           <View
             style={[
@@ -384,11 +376,9 @@ async function pauseSound() {
         <Text style={{ color: "white", fontSize: 30 }}></Text>
       </View>
     );
-  
-  
-  }else {
+  } else {
     return (
-      <View>
+      <View style={styles.parentContainer}>
         <Image
           source={{
             uri: "https://media1.giphy.com/media/VM01S5yIaKCgqg1bSF/giphy.gif?cid=ecf05e47wsx84h8uxwgbb63qrft1wc6vv3uij6si6micx29r&rid=giphy.gif&ct=g",
@@ -398,9 +388,7 @@ async function pauseSound() {
             { height: screenHeight * 0.28, width: screenHeight * 0.28 },
           ]}
         />
-        <Text style={styles.questionText}>
-          SORRY YOU HAVE LOST ALL YOUR LIVES
-        </Text>
+        <Text style={styles.questionText}>YOU HAVE LOST ALL YOUR LIVES</Text>
         <Text style={styles.scoresText}>Current score: {score}</Text>
         <Text style={styles.scoresText}>High score: {highScore}</Text>
         <View>
@@ -414,6 +402,7 @@ async function pauseSound() {
               <Text>Go Back to Menu</Text>
             </View>
           </Pressable>
+
           <Pressable
             style={styles.button}
             onPress={() => {

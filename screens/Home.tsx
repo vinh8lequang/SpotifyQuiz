@@ -1,10 +1,4 @@
-import {
-  ActivityIndicator,
-  Text,
-  StyleSheet,
-  View,
-  Button,
-} from "react-native";
+import { ActivityIndicator, Text, StyleSheet, View } from "react-native";
 import TopArtistsHome from "../components/TopArtistsHome";
 import PlayComponent from "../components/PlayComponent";
 import { useDispatch } from "react-redux";
@@ -14,11 +8,11 @@ import {
   topUserArtistsSelector,
 } from "../redux/slices/topUserArtists";
 import { useSelector } from "react-redux";
-import { fetchTopTracks, topTracksSelector } from "../redux/slices/topTracks";
-import { fetchAlbum } from "../redux/slices/Albums";
-import { fetchTracks } from "../redux/slices/tracks";
+import { topTracksSelector } from "../redux/slices/topTracks";
 import { getData, storeData } from "../utils/storage";
 import { useIsFocused } from "@react-navigation/native";
+import { fetchAlbum, albumsSelector } from "../redux/slices/Albums";
+import { fetchTracks, tracksSelector } from "../redux/slices/tracks";
 
 // export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 const Home = ({ navigation }: any) => {
@@ -26,7 +20,8 @@ const Home = ({ navigation }: any) => {
 
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector(topUserArtistsSelector);
-  const { data: data2 } = useSelector(topTracksSelector);
+  const { isLoading: isLoading2, data: data2 } = useSelector(albumsSelector);
+  const { isLoading: isLoading3, data: data3 } = useSelector(tracksSelector);
 
   const [highScore, setHighScore] = useState(0);
 
@@ -36,25 +31,49 @@ const Home = ({ navigation }: any) => {
 
   useEffect(() => {
     //fetching data from Spotify API
-    // @ts-ignore
-    dispatch(fetchTopUserArtists());
-    // @ts-ignore
-    dispatch(fetchTopTracks());
-
-    //In order to fix a bug of quiz first load
-    // @ts-ignore
-    dispatch(fetchAlbum());
-    // @ts-ignore
-    dispatch(fetchAlbum());
-    // @ts-ignore
-    dispatch(fetchAlbum());
-    // @ts-ignore
-    dispatch(fetchTracks());
-    // @ts-ignore
-    dispatch(fetchTracks());
-    // @ts-ignore
-    dispatch(fetchTracks());
-
+    const fetchData = async () => {
+      // @ts-ignore
+      await dispatch(fetchTopUserArtists());
+    };
+    fetchData();
+    const fetchDataAlbums = async () => {
+      // @ts-ignore
+      await dispatch(fetchAlbum());
+    };
+    const fetchDataTracks = async () => {
+      // @ts-ignore
+      await dispatch(fetchTracks());
+    };
+    setTimeout(() => {
+      fetchDataAlbums();
+    }, 300);
+    setTimeout(() => {
+      fetchDataTracks();
+    }, 600);
+    setTimeout(() => {
+      fetchDataAlbums();
+    }, 900);
+    setTimeout(() => {
+      fetchDataTracks();
+    }, 1200);
+    setTimeout(() => {
+      fetchDataAlbums();
+    }, 1500);
+    setTimeout(() => {
+      fetchDataTracks();
+    }, 1800);
+    setTimeout(() => {
+      fetchDataAlbums();
+    }, 2100);
+    setTimeout(() => {
+      fetchDataTracks();
+    }, 2400);
+    setTimeout(() => {
+      fetchDataAlbums();
+    }, 2700);
+    setTimeout(() => {
+      fetchDataTracks();
+    }, 3000);
     // clearHighScore();
   }, []);
 
@@ -91,21 +110,26 @@ const Home = ({ navigation }: any) => {
         <ActivityIndicator />
       </View>
     );
+  } else {
+    // setTimeout(() => {
+    //   console.log("Data", data);
+    //   console.log("Data2", data2);
+    //   console.log("Data3", data3);
+    // }, 1000);
+    return (
+      <View style={styles.container}>
+        <View style={styles.topHalfContainer}>
+          {/* @ts-ignore */}
+          <TopArtistsHome title="Your most listened artists" artists={data} />
+        </View>
+        <View style={styles.bottomHalfContainer}>
+          <PlayComponent />
+          <Text style={styles.highScoreText}>High Score:</Text>
+          <Text style={styles.highScoreNumber}>{highScore}</Text>
+        </View>
+      </View>
+    );
   }
-
-  return (
-    <View style={styles.container}>
-      <View style={styles.topHalfContainer}>
-        {/* @ts-ignore */}
-        <TopArtistsHome title="Your most listened artists" artists={data} />
-      </View>
-      <View style={styles.bottomHalfContainer}>
-        <PlayComponent />
-        <Text style={styles.highScoreText}>High Score:</Text>
-        <Text style={styles.highScoreNumber}>{highScore}</Text>
-      </View>
-    </View>
-  );
 };
 
 const styles = StyleSheet.create({

@@ -44,7 +44,7 @@ export default function App() {
                 card: "#141414",
                 text: "#ffffff",
                 border: "#282525",
-                notification: "#1DB954",
+                notification: "#ffffff",
               },
             }}
           >

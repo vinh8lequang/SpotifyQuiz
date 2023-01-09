@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     height: 45,
     marginHorizontal: 15,
     alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
   },
   buttonCorrect: {
