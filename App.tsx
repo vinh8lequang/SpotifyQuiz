@@ -1,7 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaView } from "react-native";
-import useCachedResources from "./hooks/useCachedResources";
 import { StatusBar } from "expo-status-bar";
 import Login from "./screens/Login";
 import TabNavigation from "./navigation/TabNavigation";
@@ -13,7 +12,6 @@ import { useEffect, useState } from "react";
 const Stack = createStackNavigator();
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
   useEffect(() => {
     fetchUser();
@@ -28,28 +26,25 @@ export default function App() {
     }
   };
 
-  if (!isLoadingComplete) {
-    return null;
-  } else {
-    return (
-      <Provider store={store}>
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#141414" }}>
-          <NavigationContainer
-            theme={{
-              //Spotify's colors
-              dark: true,
-              colors: {
-                primary: "#1DB954",
-                background: "black",
-                card: "#141414",
-                text: "#ffffff",
-                border: "#282525",
-                notification: "#ffffff",
-              },
-            }}
-          >
-            <Stack.Navigator>
-              {/* {!isAuthenticated ? (
+  return (
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#141414" }}>
+        <NavigationContainer
+          theme={{
+            //Spotify's colors
+            dark: true,
+            colors: {
+              primary: "#1DB954",
+              background: "black",
+              card: "#141414",
+              text: "#ffffff",
+              border: "#282525",
+              notification: "#ffffff",
+            },
+          }}
+        >
+          <Stack.Navigator>
+            {/* {!isAuthenticated ? (
                 <>
                   <Stack.Screen
                     options={{ headerShown: false }}
@@ -70,21 +65,20 @@ export default function App() {
                 />
               )} */}
 
-              <Stack.Screen
-                options={{ headerShown: false }}
-                name="Login"
-                component={Login}
-              />
-              <Stack.Screen
-                options={{ headerShown: false }}
-                name="HomeTab"
-                component={TabNavigation}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-          <StatusBar />
-        </SafeAreaView>
-      </Provider>
-    );
-  }
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Login"
+              component={Login}
+            />
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="HomeTab"
+              component={TabNavigation}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+        <StatusBar />
+      </SafeAreaView>
+    </Provider>
+  );
 }
