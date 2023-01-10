@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../utils/storage";
 import { useIsFocused } from "@react-navigation/native";
 
-const Stats = ({ navigation }: any) => {
+const Achievements = ({ navigation }: any) => {
   const isFocused = useIsFocused();
 
   const firstState = {
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Stats;
+export default Achievements;

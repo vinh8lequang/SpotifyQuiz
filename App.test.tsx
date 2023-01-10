@@ -1,12 +1,14 @@
-import useCachedResources from "./hooks/useCachedResources";
 import React from "react";
-import renderer from "react-test-renderer";
+import renderer, { create } from "react-test-renderer";
 import App from "./App";
+import Login from "./screens/Login";
 
 jest.mock("@react-native-async-storage/async-storage", () => ({
   setItem: jest.fn(() => Promise.resolve()),
   getItem: jest.fn(() => Promise.resolve()),
 }));
+
+// const login = create(<Login />);
 
 describe("<App />", () => {
   try {
@@ -19,3 +21,9 @@ describe("<App />", () => {
     console.error(error);
   }
 });
+
+// describe("<Login />", () => {
+//   test("snapshot", () => {
+//     expect(<Login />).toMatchSnapshot();
+//   });
+// });

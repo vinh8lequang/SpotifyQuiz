@@ -19,6 +19,7 @@ import styles from "./styles";
 import { fetchTracks, tracksSelector } from "../../redux/slices/tracks";
 import { getData, storeData } from "../../utils/storage";
 import relevantArtist from "../../services/RelevantArtist";
+import achievementsUpdater from "../../services/achievementsUpdater";
 import { Audio } from "expo-av";
 import getInt from "../../services/getRandomInt";
 
@@ -44,6 +45,7 @@ const Quiz = ({ navigation }: any) => {
   }, []);
 
   var initialState = {
+    type: "",
     question: "",
     answers: ["", "", "", ""],
     correct: "",
@@ -83,6 +85,7 @@ const Quiz = ({ navigation }: any) => {
     const { sound } = await Audio.Sound.createAsync({
       uri: question.previewUrl,
     });
+    //@ts-ignore
     setSound(sound);
 
     console.log("Playing Sound");
@@ -127,9 +130,13 @@ const Quiz = ({ navigation }: any) => {
     if (e == question.correct) {
       var ns = score + 1;
       var c = color;
+      //@ts-ignore
       c[f] = styles.buttonCorrect;
       setColor(c);
+      //update artists scoreboard
       relevantArtist(question.aux.artist, question.aux.url);
+      //update achievements
+      achievementsUpdater(question.type);
       if (specialQuestion == 5) {
         nq = 0;
         console.log("reinicio");
@@ -143,6 +150,7 @@ const Quiz = ({ navigation }: any) => {
       }, 1000);
     } else {
       var c = color;
+      //@ts-ignore
       c[f] = styles.buttonIncorrect;
       setColor(c);
       if (specialQuestion == 5) {
@@ -159,6 +167,7 @@ const Quiz = ({ navigation }: any) => {
     }
 
     if (specialQuestion == 4) {
+      //@ts-ignore
       dispatch(fetchTracks());
 
       console.log("Debug------SPECIAL--------------");
@@ -168,18 +177,22 @@ const Quiz = ({ navigation }: any) => {
       setAlter(true);
     } else {
       if (alter == false) {
+        //@ts-ignore
         dispatch(fetchTracks());
         console.log("Debug------TRACKS--------------");
         setTimeout(() => {
+          //@ts-ignore
           setQuestion(generateQuestionTrack(data2));
         }, 1000);
         setAlter(true);
       } else {
+        //@ts-ignore
         dispatch(fetchAlbum());
 
         console.log("Debug----ALBUMS--------------");
 
         setTimeout(() => {
+          //@ts-ignore
           setQuestion(generateQuestionAlbum(data));
         }, 1000);
         setAlter(false);

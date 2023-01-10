@@ -13,7 +13,7 @@ const PlayComponent = () => {
   return (
     <TouchableOpacity onPress={onPressPlay}>
       <View style={styles.container}>
-        <Text style={styles.playText}>Play</Text>
+        <Text style={styles.playText}>Start quiz</Text>
       </View>
     </TouchableOpacity>
   );

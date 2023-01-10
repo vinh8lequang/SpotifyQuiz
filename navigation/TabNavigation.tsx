@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import StackHomeNavigation from "./StackHomeNavigation";
 import Stats from "../screens/Stats";
+import Achievements from "../screens/Achievements";
 import Colors from "../tabBarColors/Colors";
 import useColorScheme from "../tabBarColors/useColorScheme";
 
@@ -18,9 +19,11 @@ const TabNavigation = () => {
 
             if (route.name === "Home") {
               iconName = focused ? "home" : "home-outline";
-            } else if (route.name === "Stats") {
+            } else if (route.name === "Scoreboard") {
               iconName = focused ? "stats-chart" : "stats-chart-outline";
-            } 
+            } else if (route.name === "Achievements") {
+              iconName = focused ? "stats-chart" : "stats-chart-outline";
+            }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: Colors[colorScheme].tint,
@@ -32,8 +35,13 @@ const TabNavigation = () => {
           options={{ headerShown: false }}
         />
         <Tabs.Screen
-          name="Stats"
+          name="Scoreboard"
           component={Stats}
+          options={{ headerShown: false }}
+        />
+        <Tabs.Screen
+          name="Achievements"
+          component={Achievements}
           options={{ headerShown: false }}
         />
       </Tabs.Navigator>

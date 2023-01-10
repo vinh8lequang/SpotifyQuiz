@@ -13,6 +13,7 @@ import { getData, storeData } from "../utils/storage";
 import { useIsFocused } from "@react-navigation/native";
 import { fetchAlbum, albumsSelector } from "../redux/slices/Albums";
 import { fetchTracks, tracksSelector } from "../redux/slices/tracks";
+import achievementsUpdater from "../services/achievementsUpdater";
 
 // export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 const Home = ({ navigation }: any) => {
@@ -44,6 +45,15 @@ const Home = ({ navigation }: any) => {
       // @ts-ignore
       await dispatch(fetchTracks());
     };
+
+    const testAchiev = async () => {
+      // var achievements = await getData("@achievements");
+      // console.log("achievementsStart", JSON.parse(achievements));
+
+      achievementsUpdater("track");
+    };
+    testAchiev();
+
     setTimeout(() => {
       fetchDataAlbums();
     }, 300);
@@ -74,6 +84,7 @@ const Home = ({ navigation }: any) => {
     setTimeout(() => {
       fetchDataTracks();
     }, 3000);
+
     // clearHighScore();
   }, []);
 

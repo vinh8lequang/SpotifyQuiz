@@ -69,7 +69,7 @@ const initialState: tracks = {
         "https://www.elegantthemes.com/blog/wp-content/uploads/2019/10/loading-screen-featured-image.jpg",
       albumName: "",
       trackName: "",
-      previewUrl:''
+      previewUrl: "",
     },
   ],
   isError: false,
@@ -108,7 +108,7 @@ export const fetchTracks = createAsyncThunk("/user/tracks", async () => {
   var res = [];
   const token = await getData("@access_token");
   var i = getInt(0, NUMALBUMS);
-  console.log('primer album seleccionado = ' + i)
+  // console.log('primer album seleccionado = ' + i)
   const url = "https://api.spotify.com/v1/albums/" + albums[i].id + "/tracks";
   const config: AxiosRequestConfig = {
     url: url,
@@ -171,9 +171,8 @@ export const fetchTracks = createAsyncThunk("/user/tracks", async () => {
     albumImage: albums[4].imageUri,
     albumName: albums[4].albumName,
     trackName: response2.data.items[p[0]].name,
-    previewUrl:response2.data.items[p[0]].preview_url,
+    previewUrl: response2.data.items[p[0]].preview_url,
   });
 
-  
   return res;
 });

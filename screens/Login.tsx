@@ -8,6 +8,8 @@ import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../redux/slices/user";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import achievementsInit from "../services/achievementsInit";
+
 const { width: wWidth, height: wHeight } = Dimensions.get("window");
 
 const Login = ({ navigation }: any) => {
@@ -70,12 +72,15 @@ const Login = ({ navigation }: any) => {
 
   useEffect(() => {
     if (response?.type === "success") {
-      AsyncStorage.removeItem("@topArtis");
-      AsyncStorage.removeItem("@relevantArtist");
+      // AsyncStorage.removeItem("@topArtis");
+      // AsyncStorage.removeItem("@relevantArtist");
+      // AsyncStorage.removeItem("@achievements");
       const { access_token } = response.params;
       console.log("accessToken", access_token);
       storeData("@access_token", access_token);
+      //@ts-ignore
       dispatch(getCurrentUser(access_token));
+      achievementsInit(); //initialize achievements storage
       navigation.navigate("HomeTab", { screen: "Home" });
     }
   }, [response]);
