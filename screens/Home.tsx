@@ -50,7 +50,7 @@ const Home = ({ navigation }: any) => {
       // var achievements = await getData("@achievements");
       // console.log("achievementsStart", JSON.parse(achievements));
 
-      achievementsUpdater("track");
+      achievementsUpdater("album");
     };
     testAchiev();
 

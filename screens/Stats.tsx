@@ -7,14 +7,6 @@ import { useIsFocused } from "@react-navigation/native";
 
 const Stats = ({ navigation }: any) => {
   const isFocused = useIsFocused();
-
-  const firstState = {
-    artistName: "",
-    imageUri: "",
-    puntuation: 1,
-    id: "",
-  };
-
   const [artist, setArtist] = useState();
 
   useEffect(() => {

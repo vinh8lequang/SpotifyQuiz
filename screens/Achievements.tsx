@@ -1,44 +1,45 @@
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
-import TopArtistsStats from "../components/TopArtistsStats";
+import AchievementList from "../components/AchievementList";
 import { useEffect, useState } from "react";
 import { getData } from "../utils/storage";
 import { useIsFocused } from "@react-navigation/native";
 
 const Achievements = ({ navigation }: any) => {
   const isFocused = useIsFocused();
-
-  const firstState = {
-    artistName: "",
-    imageUri: "",
-    puntuation: 1,
-    id: "",
-  };
-
-  const [artist, setArtist] = useState();
+  const [achievements, setAchievements] = useState([]);
 
   useEffect(() => {
-    const getArtist = async () => {
-      var res = await getData("@relevantArtist");
+    const getAchievements = async () => {
+      var res = await getData("@achievements");
       // @ts-ignore
-      setArtist(JSON.parse(res));
-      // console.log("Stats", artist);
+      res = JSON.parse(res);
+      // @ts-ignore
+      setAchievements(res[1]);
+      console.log("ach screen", achievements);
     };
 
     if (isFocused) {
-      getArtist();
+      getAchievements();
     }
     const removeFocusListener = navigation.addListener("focus", () => {
-      getArtist();
+      getAchievements();
     });
     return () => {
       removeFocusListener();
     };
   }, [isFocused]);
 
+  // if (!achievements) {
+  //   return (
+  //     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+  //       <ActivityIndicator />
+  //     </View>
+  //   );
+  // }
   return (
     <View style={styles.container}>
-      <TopArtistsStats title="Artists scoreboard" artists={artist} />
+      <AchievementList title="Achievements" achievements={achievements} />
     </View>
   );
 };

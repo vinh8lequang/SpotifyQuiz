@@ -15,3 +15,12 @@ export type ArtistStatsType = {
   artistName: string;
   puntuation: number;
 };
+
+export type AchievementType = {
+  type: string;
+  id: string;
+  name: string;
+  desc: string;
+  imageUri: string;
+  unlocked: boolean;
+};
