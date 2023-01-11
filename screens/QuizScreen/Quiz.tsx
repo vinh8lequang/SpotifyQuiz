@@ -24,17 +24,24 @@ import { Audio } from "expo-av";
 import getInt from "../../services/getRandomInt";
 
 const Quiz = ({ navigation }: any) => {
-  //get the height dimension to fit all phone devices
+  //get the dimensions to fit all phone devices
   const [screenHeight, setScreenHeight] = useState(
     Dimensions.get("window").height
   );
+  const [screenWidth, setScreenWidth] = useState(
+    Dimensions.get("window").width
+  );
 
   useEffect(() => {
-    const onChange = (result: {
+    const onChange = ({
+      window: { width, height },
+    }: {
       window: { width: number; height: number };
     }) => {
-      setScreenHeight(result.window.height);
+      setScreenHeight(height);
+      setScreenWidth(width);
     };
+
     const removeChangeListener = Dimensions.addEventListener(
       "change",
       onChange
@@ -244,6 +251,18 @@ const Quiz = ({ navigation }: any) => {
     );
   }
 
+  const isTablet = screenWidth > screenHeight;
+  var flexDirection, height, width;
+  if (isTablet) {
+    flexDirection = "row";
+    height = screenHeight * 0.45;
+    width = height;
+  } else {
+    flexDirection = "column";
+    height = screenHeight * 0.3;
+    width = height;
+  }
+
   if (lifes > 0 && specialQuestion != 5) {
     return (
       <View style={styles.parentContainer}>
@@ -264,14 +283,11 @@ const Quiz = ({ navigation }: any) => {
           </View>
           <Text style={styles.score}>{"Score: " + score}</Text>
         </View>
-        <View style={styles.container}>
-          <View>
+        <View style={[styles.container, { flexDirection }]}>
+          <View style={styles.topHalfContainer}>
             <Image
               source={{ uri: question.image }}
-              style={[
-                styles.image,
-                { height: screenHeight * 0.28, width: screenHeight * 0.28 },
-              ]}
+              style={[styles.image, { height, width }]}
             />
             <Text style={styles.questionText}>{question.question}</Text>
           </View>
@@ -338,7 +354,7 @@ const Quiz = ({ navigation }: any) => {
           </View>
           <Text style={styles.score}>{"Score: " + score}</Text>
         </View>
-        <View style={styles.container}>
+        <View style={[styles.container, { flexDirection }]}>
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
@@ -346,8 +362,8 @@ const Quiz = ({ navigation }: any) => {
               title={isPlaying ? "Pause" : "Play"}
               onPress={togglePlayback}
             />
+            <Text style={styles.questionText}>{question.question}</Text>
           </View>
-          <Text style={styles.questionText}>{question.question}</Text>
           <View
             style={[
               styles.answersContainer,
@@ -393,19 +409,23 @@ const Quiz = ({ navigation }: any) => {
     );
   } else {
     return (
-      <View style={styles.parentContainer}>
-        <Image
-          source={{
-            uri: "https://media1.giphy.com/media/VM01S5yIaKCgqg1bSF/giphy.gif?cid=ecf05e47wsx84h8uxwgbb63qrft1wc6vv3uij6si6micx29r&rid=giphy.gif&ct=g",
-          }}
-          style={[
-            styles.image,
-            { height: screenHeight * 0.28, width: screenHeight * 0.28 },
-          ]}
-        />
-        <Text style={styles.questionText}>YOU HAVE LOST ALL YOUR LIVES</Text>
-        <Text style={styles.scoresText}>Current score: {score}</Text>
-        <Text style={styles.scoresText}>High score: {highScore}</Text>
+      <View
+        style={[
+          styles.parentContainer,
+          { flexDirection, justifyContent: "center", alignItems: "center" },
+        ]}
+      >
+        <View>
+          <Image
+            source={{
+              uri: "https://media1.giphy.com/media/VM01S5yIaKCgqg1bSF/giphy.gif?cid=ecf05e47wsx84h8uxwgbb63qrft1wc6vv3uij6si6micx29r&rid=giphy.gif&ct=g",
+            }}
+            style={[styles.image, { height, width }]}
+          />
+          <Text style={styles.questionText}>YOU HAVE LOST ALL YOUR LIVES</Text>
+          <Text style={styles.scoresText}>Current score: {score}</Text>
+          <Text style={styles.scoresText}>High score: {highScore}</Text>
+        </View>
         <View>
           <Pressable
             style={styles.button}

@@ -10,13 +10,14 @@ const styles = StyleSheet.create({
     // justifyContent: "space-evenly",
   },
   image: {
-    width: "100%",
-    height: 80,
-    maxWidth: 80,
+    // width: "100%",
+    // height: 80,
+    // maxWidth: 80,
     borderRadius: 10,
   },
   text: {
-    fontSize: 10,
+    // fontSize: 14,
+    width: "200%",
     color: "grey",
     marginTop: 3,
     textAlign: "center",

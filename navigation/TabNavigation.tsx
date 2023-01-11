@@ -22,7 +22,7 @@ const TabNavigation = () => {
             } else if (route.name === "Scoreboard") {
               iconName = focused ? "stats-chart" : "stats-chart-outline";
             } else if (route.name === "Achievements") {
-              iconName = focused ? "stats-chart" : "stats-chart-outline";
+              iconName = focused ? "trophy" : "trophy-outline";
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },

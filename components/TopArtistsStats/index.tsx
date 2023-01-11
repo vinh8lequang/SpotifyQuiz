@@ -7,6 +7,7 @@ import styles from "./styles";
 export type TopArtistsStatsProps = {
   title: string;
   artists?: [ArtistStatsType];
+  podium: boolean;
 };
 
 const TopArtistsStats = (props: TopArtistsStatsProps) => {
@@ -16,7 +17,9 @@ const TopArtistsStats = (props: TopArtistsStatsProps) => {
       <Text style={styles.title}>{props.title}</Text>
       <FlatList
         data={props.artists}
-        renderItem={({ item }) => <ArtistStats artist={item} />}
+        renderItem={({ item }) => (
+          <ArtistStats artist={item} podium={props.podium} />
+        )}
         keyExtractor={(item) => item.id}
       />
     </View>

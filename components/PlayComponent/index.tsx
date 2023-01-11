@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-// import styles from "./styles";
+import { responsiveFontSize } from "react-native-responsive-dimensions";
 
 const PlayComponent = () => {
   const navigation = useNavigation();
@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
   },
   playText: {
     color: "white",
-    fontSize: 16,
-    fontWeight: "bold",
+    fontSize: responsiveFontSize(1.9),
+    fontWeight: "600",
     textAlign: "center",
   },
 });

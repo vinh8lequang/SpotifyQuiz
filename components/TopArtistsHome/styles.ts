@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
   columnWrapper: {
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
   },
   title: {
     color: "white",
-    fontSize: 17,
+    fontSize: 18,
     fontWeight: "bold",
     marginVertical: 5,
     textAlign: "center",

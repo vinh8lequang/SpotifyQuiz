@@ -1,9 +1,9 @@
-import { StyleSheet } from "react-native";
+import { StatusBar, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   parentContainer: {
     flex: 1,
-    paddingTop: 25,
+    paddingTop: StatusBar.currentHeight,
   },
   containerScoreandLives: {
     flexDirection: "row-reverse",
@@ -14,6 +14,21 @@ const styles = StyleSheet.create({
   },
   containerLives: {
     flexDirection: "row",
+  },
+  container: {
+    flex: 1,
+    // flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  topHalfContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  answersContainer: {
+    flex: 1,
+    margin: 0,
+    justifyContent: "center",
   },
   lifeActive: {
     height: 17,
@@ -32,12 +47,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: "white",
     alignSelf: "center",
-  },
-  container: {
-    flex: 1,
-    // flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
   },
   questionText: {
     marginVertical: 25,
@@ -62,11 +71,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     // borderRadius: 20,
     alignSelf: "center",
-  },
-  answersContainer: {
-    flex: 1,
-    margin: 0,
-    justifyContent: "flex-end",
   },
   textAnswer: {
     color: "black",
@@ -94,6 +98,7 @@ const styles = StyleSheet.create({
     height: 45,
     marginHorizontal: 15,
     alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
   },
   buttonIncorrect: {
@@ -104,6 +109,7 @@ const styles = StyleSheet.create({
     height: 45,
     marginHorizontal: 15,
     alignItems: "center",
+    alignSelf: "center",
     justifyContent: "center",
   },
 });

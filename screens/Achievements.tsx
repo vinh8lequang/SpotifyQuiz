@@ -1,4 +1,4 @@
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator, StatusBar, StyleSheet } from "react-native";
 import { Text, View } from "../components/Themed";
 import AchievementList from "../components/AchievementList";
 import { useEffect, useState } from "react";
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 20,
-    paddingTop: 10,
+    paddingTop: StatusBar.currentHeight,
   },
   title: {
     fontSize: 20,

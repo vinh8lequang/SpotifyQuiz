@@ -1,4 +1,12 @@
-import { ActivityIndicator, Text, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  StyleSheet,
+  View,
+  StatusBar,
+  Platform,
+  Dimensions,
+} from "react-native";
 import TopArtistsHome from "../components/TopArtistsHome";
 import PlayComponent from "../components/PlayComponent";
 import { useDispatch } from "react-redux";
@@ -8,21 +16,45 @@ import {
   topUserArtistsSelector,
 } from "../redux/slices/topUserArtists";
 import { useSelector } from "react-redux";
-import { topTracksSelector } from "../redux/slices/topTracks";
 import { getData, storeData } from "../utils/storage";
 import { useIsFocused } from "@react-navigation/native";
-import { fetchAlbum, albumsSelector } from "../redux/slices/Albums";
-import { fetchTracks, tracksSelector } from "../redux/slices/tracks";
+import { fetchAlbum } from "../redux/slices/Albums";
+import { fetchTracks } from "../redux/slices/tracks";
 import achievementsUpdater from "../services/achievementsUpdater";
+import { responsiveFontSize } from "react-native-responsive-dimensions";
 
-// export default function Home({ navigation }: RootTabScreenProps<'Home'>) {
 const Home = ({ navigation }: any) => {
+  //get the dimensions to fit all phone devices
+  const [screenHeight, setScreenHeight] = useState(
+    Dimensions.get("window").height
+  );
+  const [screenWidth, setScreenWidth] = useState(
+    Dimensions.get("window").width
+  );
+
+  useEffect(() => {
+    const onChange = ({
+      window: { width, height },
+    }: {
+      window: { width: number; height: number };
+    }) => {
+      setScreenHeight(height);
+      setScreenWidth(width);
+    };
+
+    const removeChangeListener = Dimensions.addEventListener(
+      "change",
+      onChange
+    );
+    return () => {
+      removeChangeListener.remove();
+    };
+  }, []);
+
   const isFocused = useIsFocused();
 
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector(topUserArtistsSelector);
-  const { isLoading: isLoading2, data: data2 } = useSelector(albumsSelector);
-  const { isLoading: isLoading3, data: data3 } = useSelector(tracksSelector);
 
   const [highScore, setHighScore] = useState(0);
 
@@ -122,21 +154,32 @@ const Home = ({ navigation }: any) => {
       </View>
     );
   } else {
-    // setTimeout(() => {
-    //   console.log("Data", data);
-    //   console.log("Data2", data2);
-    //   console.log("Data3", data3);
-    // }, 1000);
+    const isTablet = screenWidth > screenHeight;
+    var flexDirection, justifyContent, fontSizeHSText, fontSizeHSNumber;
+
+    if (isTablet) {
+      flexDirection = "row";
+      justifyContent = "center";
+      fontSizeHSText;
+      fontSizeHSNumber;
+      fontSizeHSText = 30;
+      fontSizeHSNumber = 200;
+    } else {
+      flexDirection = "column";
+      justifyContent = "flex-start";
+      fontSizeHSText = 18;
+      fontSizeHSNumber = 80;
+    }
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { flexDirection }]}>
         <View style={styles.topHalfContainer}>
           {/* @ts-ignore */}
           <TopArtistsHome title="Your most listened artists" artists={data} />
         </View>
-        <View style={styles.bottomHalfContainer}>
+        <View style={[styles.bottomHalfContainer, { justifyContent }]}>
           <PlayComponent />
-          <Text style={styles.highScoreText}>High Score:</Text>
-          <Text style={styles.highScoreNumber}>{highScore}</Text>
+          <Text style={[styles.highScoreText, {}]}>High Score:</Text>
+          <Text style={[styles.highScoreNumber, {}]}>{highScore}</Text>
         </View>
       </View>
     );
@@ -146,11 +189,12 @@ const Home = ({ navigation }: any) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 25,
+    paddingTop: StatusBar.currentHeight,
+    // flexDirection: "row",
   },
   topHalfContainer: {
-    // flex: 2,
-    height: "50%",
+    flex: 2,
+    // maxHeight: "60%",
     backgroundColor: "#2E2E2E",
     borderRadius: 15,
     margin: 5,
@@ -162,13 +206,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
   },
   highScoreText: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(1.9),
     marginTop: 10,
     color: "#FFFFFF",
     textAlign: "center",
   },
   highScoreNumber: {
-    fontSize: 80,
+    fontSize: responsiveFontSize(8),
     marginTop: 10,
     color: "#FFFFFF",
     textAlign: "center",

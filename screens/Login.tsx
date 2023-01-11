@@ -1,5 +1,11 @@
 import React from "react";
-import { View, TouchableOpacity, Dimensions, Text } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Dimensions,
+  Text,
+  StatusBar,
+} from "react-native";
 import { StyleSheet } from "react-native";
 import { ResponseType, useAuthRequest } from "expo-auth-session";
 import { useEffect } from "react";
@@ -75,7 +81,7 @@ const Login = ({ navigation }: any) => {
       // AsyncStorage.removeItem("@relevantArtist");
       // AsyncStorage.removeItem("@achievements");
       const { access_token } = response.params;
-      console.log("accessToken", access_token);
+      // console.log("accessToken", access_token);
       storeData("@access_token", access_token);
       //@ts-ignore
       dispatch(getCurrentUser(access_token));
@@ -100,6 +106,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    paddingTop: StatusBar.currentHeight,
   },
   loginButton: {
     backgroundColor: "green",
