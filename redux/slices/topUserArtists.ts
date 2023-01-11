@@ -5,7 +5,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { RootState } from "..";
 import { storeData } from "../../utils/storage";
 
-const NUMARTIST = 12;
+const NUMARTIST = 20;
 
 interface TopUserArtists {
   isLoading: boolean;
@@ -28,6 +28,7 @@ const topUserArtists = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchTopUserArtists.fulfilled, (state, { payload }) => {
+      //@ts-ignore
       state.data = payload;
       state.isLoading = false;
     });
@@ -73,7 +74,7 @@ export const fetchTopUserArtists = createAsyncThunk(
     //   console.log("ArtistName:", item.name);
     //   console.log("ImageUri:", item.images[0].url);
     // });
-    var res = [];
+    var res: any = [];
     response.data.items.forEach((item: any) => {
       res.push({
         id: item.id,

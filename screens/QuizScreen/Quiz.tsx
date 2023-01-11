@@ -265,14 +265,16 @@ const Quiz = ({ navigation }: any) => {
           <Text style={styles.score}>{"Score: " + score}</Text>
         </View>
         <View style={styles.container}>
-          <Image
-            source={{ uri: question.image }}
-            style={[
-              styles.image,
-              { height: screenHeight * 0.28, width: screenHeight * 0.28 },
-            ]}
-          />
-          <Text style={styles.questionText}>{question.question}</Text>
+          <View>
+            <Image
+              source={{ uri: question.image }}
+              style={[
+                styles.image,
+                { height: screenHeight * 0.28, width: screenHeight * 0.28 },
+              ]}
+            />
+            <Text style={styles.questionText}>{question.question}</Text>
+          </View>
           <View
             style={[
               styles.answersContainer,

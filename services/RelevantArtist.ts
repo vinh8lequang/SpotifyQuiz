@@ -5,6 +5,7 @@ const relevantArtist = async (e, f) => {
   if (e != undefined || f != undefined) {
     var artists = await getData("@relevantArtist");
     var found = false;
+    //@ts-ignore
     artists = JSON.parse(artists);
 
     if (!artists) {
@@ -17,13 +18,15 @@ const relevantArtist = async (e, f) => {
         },
       ];
     } else {
+      //@ts-ignore
       artists.forEach((element) => {
         if (e == element.artistName) {
           element.puntuation++;
           found = true;
         }
       });
-      if (found == false) {
+      if (!found) {
+        //@ts-ignore
         artists.push({
           artistName: e,
           imageUri: f,
@@ -34,6 +37,7 @@ const relevantArtist = async (e, f) => {
     }
     //artists= artists.sort(artists.puntuation)
     console.log(
+      //@ts-ignore
       artists.sort((a, b) => {
         return a.puntuation < b.puntuation;
       })

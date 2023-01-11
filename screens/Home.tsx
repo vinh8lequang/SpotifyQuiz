@@ -46,13 +46,13 @@ const Home = ({ navigation }: any) => {
       await dispatch(fetchTracks());
     };
 
-    const testAchiev = async () => {
-      // var achievements = await getData("@achievements");
-      // console.log("achievementsStart", JSON.parse(achievements));
+    // const testAchiev = async () => {
+    //   // var achievements = await getData("@achievements");
+    //   // console.log("achievementsStart", JSON.parse(achievements));
 
-      achievementsUpdater("album");
-    };
-    testAchiev();
+    //   achievementsUpdater("audio");
+    // };
+    // testAchiev();
 
     setTimeout(() => {
       fetchDataAlbums();

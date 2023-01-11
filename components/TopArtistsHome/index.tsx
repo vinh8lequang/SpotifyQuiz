@@ -10,7 +10,7 @@ export type TopArtistsHomeProps = {
 };
 
 const TopArtistsHome = (props: TopArtistsHomeProps) => {
-  var propsSliced = props.artists?.slice(0, 12);
+  var propsSliced = props.artists?.slice(0, 18);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{props.title}</Text>

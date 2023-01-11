@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import { storeData } from "../utils/storage";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../redux/slices/user";
-import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import achievementsInit from "../services/achievementsInit";
 

@@ -28,9 +28,9 @@ const achievementsInit = async () => {
     achievements = [
       [
         {
-          albumCounter: 32,
-          trackCounter: 13,
-          audioCounter: 2,
+          albumCounter: 0,
+          trackCounter: 0,
+          audioCounter: 0,
         },
       ],
       [

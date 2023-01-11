@@ -8,7 +8,7 @@ import { shuffle } from "../../services/getRandomInt";
 import { storeData } from "../../utils/storage";
 import { getInt2 } from "../../services/getRandomInt";
 
-const NUMARTIST = 10;
+const NUMARTIST = 20;
 const NUMALBUMS = 10;
 const NUMALBUMS2 = 6;
 

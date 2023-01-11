@@ -24,17 +24,21 @@ const achievementsUpdater = async (questionType: string) => {
     return null;
   }
   var achievements = await getData("@achievements");
+  //@ts-ignore
   achievements = JSON.parse(achievements);
 
   var typeCounter = 0; //total counter of a certain type (album,track,audio)
   if (questionType === "album") {
+    //@ts-ignore
     typeCounter = ++achievements[0][0].albumCounter;
   } else if (questionType === "track") {
+    //@ts-ignore
     typeCounter = ++achievements[0][0].trackCounter;
   } else if (questionType === "audio") {
+    //@ts-ignore
     typeCounter = ++achievements[0][0].audioCounter;
   }
-
+  //@ts-ignore//@ts-ignore
   achievements[1].forEach((item) => {
     if (questionType == item.type) {
       if (item.stage === "stage0") {
