@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   image: {
-    width: "100%",
+    width: 80,
     height: 80,
     maxWidth: 80,
     borderRadius: 10,
@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   infoContainer: {
     alignItems: "flex-start",
     maxWidth: "75%",
+    // maxWidth: "100%",
     // paddingEnd: "10%",
   },
   textNameUnlocked: {

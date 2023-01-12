@@ -37,7 +37,15 @@ const Achievement = (props: AchievementProps) => {
       {props.achievement.unlocked ? (
         <Animated.Image
           source={{ uri: props.achievement.imageUri }}
-          style={[styles.image, { transform: [{ rotate: spinImage }] }]}
+          style={[
+            styles.image,
+            {
+              transform: [{ rotate: spinImage }],
+              // width: 80,
+              // height: 80,
+              // maxWidth: 80,
+            },
+          ]}
         />
       ) : (
         <Image

@@ -39,7 +39,7 @@ const relatedArtist = createSlice({
   },
 });
 
-export const relatedArtistSelector = (state: RootState) =>state.relatedArtist;
+export const relatedArtistSelector = (state: RootState) => state.relatedArtist;
 export default relatedArtist.reducer;
 
 export const fetchRelatedArtist = createAsyncThunk(
@@ -49,10 +49,11 @@ export const fetchRelatedArtist = createAsyncThunk(
     var artists = await getData("@topArtis");
     artists = JSON.parse(artists);
 
-
     var i = getInt(0, NUMARTIST);
-    const url = "https://api.spotify.com/v1/artists/" + artists[i].id + "/related-artists";
-
+    const url =
+      "https://api.spotify.com/v1/artists/" +
+      artists[i].id +
+      "/related-artists";
 
     const config: AxiosRequestConfig = {
       url: url,
@@ -67,12 +68,12 @@ export const fetchRelatedArtist = createAsyncThunk(
       },
     };
     const response = await axios(config);
-    
+
     var res: any = [];
     response.data.artists.forEach((item: any) => {
-      console.log(item.id)
-      console.log(item.images[0].url)
-      console.log(item.name)
+      // console.log(item.id)
+      // console.log(item.images[0].url)
+      // console.log(item.name)
       res.push({
         id: item.id,
         imageUri: item.images[0].url,

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../utils/storage";
 import { useIsFocused } from "@react-navigation/native";
 
-const Stats = ({ navigation }: any) => {
+const Discovery = ({ navigation }: any) => {
   //get the dimensions to fit all phone devices
   const [screenHeight, setScreenHeight] = useState(
     Dimensions.get("window").height
@@ -39,7 +39,7 @@ const Stats = ({ navigation }: any) => {
 
   useEffect(() => {
     const getArtist = async () => {
-      var res = await getData("@relevantArtist");
+      var res = await getData("@newDiscoveries");
       res = JSON.parse(res);
       var podiumSliced = res.slice(0, 3);
       var notPodiumSliced = res.slice(3, 30);
@@ -74,7 +74,7 @@ const Stats = ({ navigation }: any) => {
   return (
     <View style={[styles.container, { flexDirection }]}>
       <View style={styles.topHalfContainer}>
-        <TopArtistsStats title="Scoreboard" artists={podium} podium={true} />
+        <TopArtistsStats title="Discovery" artists={podium} podium={true} />
       </View>
       <View style={styles.bottomHalfContainer}>
         <TopArtistsStats title="" artists={artist} podium={false} />
@@ -109,4 +109,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Stats;
+export default Discovery;

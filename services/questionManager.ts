@@ -19,7 +19,7 @@ export function generateQuestionTrack(data: any) {
 
   switch (i) {
     case 3:
-      console.log(data[4].trackName);
+      console.log("Correct answer:", data[4].trackName);
       return {
         type: "track",
         question: `${questions[3]}${data[4].artist}`,
@@ -37,7 +37,7 @@ export function generateQuestionTrack(data: any) {
         },
       };
     case 4:
-      console.log(data[4].trackName);
+      console.log("Correct answer:", data[4].trackName);
       return {
         type: "track",
         question: `${questions[4]}${data[0].albumName}`,
@@ -56,7 +56,7 @@ export function generateQuestionTrack(data: any) {
         },
       };
     case 5:
-      console.log(data[4].trackName);
+      console.log("Correct answer:", data[4].trackName);
       return {
         type: "track",
         question: `${questions[5]}${data[4].albumName}`,
@@ -82,6 +82,7 @@ export function generateQuestionAlbum(data: any) {
   var p = shuffle([0, 1, 4, 3]);
   switch (i) {
     case 0:
+      console.log("Correct answer:", data[4].albumName);
       return {
         type: "album",
         question: `${questions[0]}${data[0].artists}`,
@@ -100,6 +101,7 @@ export function generateQuestionAlbum(data: any) {
         },
       };
     case 1:
+      console.log("Correct answer:", data[4].release_date);
       return {
         type: "album",
         question: questions[1],
@@ -118,6 +120,7 @@ export function generateQuestionAlbum(data: any) {
         },
       };
     case 2:
+      console.log("Correct answer:", data[4].albumName);
       return {
         type: "album",
         question: `${questions[2]}${data[4].artists}`,
@@ -140,6 +143,7 @@ export function generateQuestionAlbum(data: any) {
 export function generateSpecialQuestion(data: any) {
   console.log(data);
   var p = shuffle([0, 1, 4, 3]);
+  console.log("Correct answer:", data[4].trackName);
   return {
     type: "audio",
     question: `${questions[6]}`,

@@ -16,7 +16,7 @@ const Achievements = ({ navigation }: any) => {
       res = JSON.parse(res);
       // @ts-ignore
       setAchievements(res[1]);
-      console.log("ach screen", achievements);
+      // console.log("ach screen", achievements);
     };
 
     if (isFocused) {
