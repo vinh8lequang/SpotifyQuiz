@@ -95,7 +95,9 @@ export default albums.reducer;
 //GET THE ALBUMS
 
 export const fetchAlbum = createAsyncThunk("/user/albums", async () => {
-  var artists = await getData("@topArtis");
+  var k = getInt(0, 3);
+  if(k===2){var artists = await getData("@relatedArtist");}
+  else{var artists = await getData("@topArtis");}
   artists = JSON.parse(artists);
   var res = [];
   const token = await getData("@access_token");

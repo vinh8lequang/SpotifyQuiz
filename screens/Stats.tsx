@@ -35,11 +35,16 @@ const Stats = ({ navigation }: any) => {
 
   const isFocused = useIsFocused();
   const [artist, setArtist] = useState();
+<<<<<<< Updated upstream
   const [podium, setPodium] = useState();
+=======
+  const[discoveries,setDiscoveries]=useState();
+>>>>>>> Stashed changes
 
   useEffect(() => {
     const getArtist = async () => {
       var res = await getData("@relevantArtist");
+<<<<<<< Updated upstream
       res = JSON.parse(res);
       var podiumSliced = res.slice(0, 3);
       var notPodiumSliced = res.slice(3, 30);
@@ -50,6 +55,13 @@ const Stats = ({ navigation }: any) => {
       setArtist(notPodiumSliced);
       console.log("Stats podium", podiumSliced);
       console.log("Stats notpodium", notPodiumSliced);
+=======
+      var res2 =await getData("@newDiscoveries");
+      // @ts-ignore
+      setArtist(JSON.parse(res));
+      setDiscoveries(JSON.parse(res2));
+      // console.log("Stats", artist);
+>>>>>>> Stashed changes
     };
 
     if (isFocused) {
@@ -72,6 +84,7 @@ const Stats = ({ navigation }: any) => {
   }
 
   return (
+<<<<<<< Updated upstream
     <View style={[styles.container, { flexDirection }]}>
       <View style={styles.topHalfContainer}>
         <TopArtistsStats title="Podium" artists={podium} podium={true} />
@@ -83,6 +96,11 @@ const Stats = ({ navigation }: any) => {
           podium={false}
         />
       </View>
+=======
+    <View style={styles.container}>
+      <TopArtistsStats title="Artists scoreboard" artists={artist} />
+      <TopArtistsStats title="New Discoveries" artists={discoveries} />
+>>>>>>> Stashed changes
     </View>
   );
 };

@@ -6,6 +6,7 @@ import topUserArtistsReducer from "./slices/topUserArtists";
 import albumsReducer from "./slices/Albums";
 import tracksReducer from "./slices/tracks";
 import topTracksReducer from "./slices/topTracks";
+import relatedArtistReducer from "./slices/relatedArtist";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     albums: albumsReducer,
     tracks: tracksReducer,
     topTracks: topTracksReducer,
+    relatedArtist:relatedArtistReducer
   },
   middleware: [thunk],
 });

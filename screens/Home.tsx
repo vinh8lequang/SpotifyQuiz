@@ -21,7 +21,12 @@ import { useIsFocused } from "@react-navigation/native";
 import { fetchAlbum } from "../redux/slices/Albums";
 import { fetchTracks } from "../redux/slices/tracks";
 import achievementsUpdater from "../services/achievementsUpdater";
+<<<<<<< Updated upstream
 import { responsiveFontSize } from "react-native-responsive-dimensions";
+=======
+import { fetchRelatedArtist } from "../redux/slices/relatedArtist";
+import { relatedArtistSelector } from "../redux/slices/relatedArtist";
+>>>>>>> Stashed changes
 
 const Home = ({ navigation }: any) => {
   //get the dimensions to fit all phone devices
@@ -55,6 +60,12 @@ const Home = ({ navigation }: any) => {
 
   const dispatch = useDispatch();
   const { isLoading, data } = useSelector(topUserArtistsSelector);
+<<<<<<< Updated upstream
+=======
+  const { isLoading: isLoading2, data: data2 } = useSelector(albumsSelector);
+  const { isLoading: isLoading3, data: data3 } = useSelector(tracksSelector);
+  const{isLoading: isLoading4, data: data4} = useSelector(relatedArtistSelector)
+>>>>>>> Stashed changes
 
   const [highScore, setHighScore] = useState(0);
 
@@ -67,8 +78,20 @@ const Home = ({ navigation }: any) => {
     const fetchData = async () => {
       // @ts-ignore
       await dispatch(fetchTopUserArtists());
+      var res = await getData("@relatedArtist");
+      console.log(res)
     };
     fetchData();
+    const fetchData2 = async () => {
+      // @ts-ignore
+      //console.log(res)
+      await dispatch(fetchRelatedArtist());
+
+      res = await getData("@relatedArtist");
+      console.log(res)
+    };
+    fetchData2();
+
     const fetchDataAlbums = async () => {
       // @ts-ignore
       await dispatch(fetchAlbum());
