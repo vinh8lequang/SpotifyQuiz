@@ -2,7 +2,7 @@ import getInt from "./getRandomInt";
 import { shuffle } from "./getRandomInt";
 const questions = [
   "Which one of these albums is NOT from the artist ",
-  "In what year was this album released ",
+  "On what date was this album released ",
   "Which one of these albums IS from the artist ",
 
   "Which one of these tracks IS from the artist ",

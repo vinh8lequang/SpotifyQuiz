@@ -3,7 +3,7 @@ import { storeData } from "../utils/storage";
 
 /*
 Album achievements:
-    "Album Newbie": awarded for answering 1 album question1 correctly
+    "Album Newbie": awarded for answering 1 album question correctly
     "Vinyl Collector": awarded for answering 5 album questions correctly
     "Studio Rat": awarded for answering 10 album questions correctly
     "Discography Devotee": awarded for answering 15 album questions correctly

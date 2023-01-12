@@ -2,7 +2,7 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import StackHomeNavigation from "./StackHomeNavigation";
-import Stats from "../screens/Stats";
+import Scoreboard from "../screens/Scoreboard";
 import Discovery from "../screens/Discovery";
 import Achievements from "../screens/Achievements";
 import Colors from "../tabBarColors/Colors";
@@ -39,7 +39,7 @@ const TabNavigation = () => {
         />
         <Tabs.Screen
           name="Scoreboard"
-          component={Stats}
+          component={Scoreboard}
           options={{ headerShown: false }}
         />
         <Tabs.Screen
