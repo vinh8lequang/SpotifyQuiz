@@ -83,6 +83,7 @@ const Login = ({ navigation }: any) => {
       // AsyncStorage.removeItem("@topArtis");
       // AsyncStorage.removeItem("@relevantArtist");
       // AsyncStorage.removeItem("@achievements");
+      // AsyncStorage.removeItem("@highScore");
       const { access_token } = response.params;
       // console.log("accessToken", access_token);
       storeData("@access_token", access_token);
@@ -120,7 +121,7 @@ const Login = ({ navigation }: any) => {
       <View style={styles.fillerContainter}></View>
       <View style={styles.halfContainter}>
         <Animated.Image
-          source={{ uri: "https://i.ibb.co/JzVH0P2/vinyl.png" }}
+          source={{ uri: "https://i.postimg.cc/s2VTqxfT/vinyl.png" }}
           style={[
             styles.image,
             {
@@ -132,7 +133,7 @@ const Login = ({ navigation }: any) => {
           ]}
         />
         <Image
-          source={{ uri: "https://i.ibb.co/jZY1sHg/logo.png" }}
+          source={{ uri: "https://i.postimg.cc/D0tCMcmG/logo.png" }}
           style={styles.titleImage}
         />
       </View>

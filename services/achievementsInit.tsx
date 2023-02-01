@@ -39,7 +39,7 @@ const achievementsInit = async () => {
           stage: "stage0",
           id: "Album Newbie",
           desc: "1 album question answered correctly.",
-          imageUri: "https://i.ibb.co/wsnbcdt/album0.png",
+          imageUri: "https://i.postimg.cc/xTw7x9bZ/album0.png",
           unlocked: false,
         },
         {
@@ -47,7 +47,7 @@ const achievementsInit = async () => {
           stage: "stage1",
           id: "Vinyl Collector",
           desc: "5 album questions answered correctly.",
-          imageUri: "https://i.ibb.co/7JVwN8z/album1.png",
+          imageUri: "https://i.postimg.cc/9fVk21bt/album1.png",
           unlocked: false,
         },
         {
@@ -55,7 +55,7 @@ const achievementsInit = async () => {
           stage: "stage2",
           id: "Studio Rat",
           desc: "10 album questions answered correctly.",
-          imageUri: "https://i.ibb.co/ns5PbLW/album2.png",
+          imageUri: "https://i.postimg.cc/cCK9hz1Z/album2.png",
           unlocked: false,
         },
         {
@@ -63,7 +63,7 @@ const achievementsInit = async () => {
           stage: "stage3",
           id: "Discography Devotee",
           desc: "15 album questions answered correctly.",
-          imageUri: "https://i.ibb.co/p08hHKC/album3.png",
+          imageUri: "https://i.postimg.cc/pdZ6L81N/album3.png",
           unlocked: false,
         },
         {
@@ -71,7 +71,7 @@ const achievementsInit = async () => {
           stage: "stage0",
           id: "Rising Track Star",
           desc: "1 track question answered correctly.",
-          imageUri: "https://i.ibb.co/gdn1QHZ/track0.png",
+          imageUri: "https://i.postimg.cc/28Z9BgX7/track0.png",
           unlocked: false,
         },
         {
@@ -79,7 +79,7 @@ const achievementsInit = async () => {
           stage: "stage1",
           id: "Hitmaker",
           desc: "5 track questions answered correctly.",
-          imageUri: "https://i.ibb.co/tqVvMMJ/track1.png",
+          imageUri: "https://i.postimg.cc/qvHbcQPV/track1.png",
           unlocked: false,
         },
         {
@@ -87,7 +87,7 @@ const achievementsInit = async () => {
           stage: "stage2",
           id: "Track Titan",
           desc: "10 track questions answered correctly.",
-          imageUri: "https://i.ibb.co/f1RM2YL/track2.png",
+          imageUri: "https://i.postimg.cc/xdt62Qcn/track2.png",
           unlocked: false,
         },
         {
@@ -95,7 +95,7 @@ const achievementsInit = async () => {
           stage: "stage3",
           id: "Melody Master",
           desc: "15 track questions answered correctly.",
-          imageUri: "https://i.ibb.co/HVdW22D/track3.png",
+          imageUri: "https://i.postimg.cc/FHbPT3vf/track3.png",
           unlocked: false,
         },
         {
@@ -103,7 +103,7 @@ const achievementsInit = async () => {
           stage: "stage0",
           id: "Sound Prodigy",
           desc: "1 audio question answered correctly.",
-          imageUri: "https://i.ibb.co/vHF2F2P/audio0.png",
+          imageUri: "https://i.postimg.cc/6pCPFFrp/audio0.png",
           unlocked: false,
         },
         {
@@ -111,7 +111,7 @@ const achievementsInit = async () => {
           stage: "stage1",
           id: "Sound Scientist",
           desc: "5 audio questions answered correctly.",
-          imageUri: "https://i.ibb.co/6yn1L3H/audio1.png",
+          imageUri: "https://i.postimg.cc/sXHHpzrw/audio1.png",
           unlocked: false,
         },
         {
@@ -119,7 +119,7 @@ const achievementsInit = async () => {
           stage: "stage2",
           id: "Frequency Finder",
           desc: "10 audio questions answered correctly.",
-          imageUri: "https://i.ibb.co/ctHD9Sq/audio2.png",
+          imageUri: "https://i.postimg.cc/Tw3HLwZK/audio2.png",
           unlocked: false,
         },
         {
@@ -127,7 +127,7 @@ const achievementsInit = async () => {
           stage: "stage3",
           id: "Musical Maverick",
           desc: "15 audio questions answered correctly.",
-          imageUri: "https://i.ibb.co/10H9BN7/audio3.png",
+          imageUri: "https://i.postimg.cc/rF03NDzW/audio3.png",
           unlocked: false,
         },
       ],
