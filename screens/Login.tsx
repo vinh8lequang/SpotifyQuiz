@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import {
   View,
   TouchableOpacity,
   Dimensions,
   Text,
   StatusBar,
+  StyleSheet,
+  Animated,
+  Easing,
+  Image,
 } from "react-native";
-import { StyleSheet } from "react-native";
 import { ResponseType, useAuthRequest } from "expo-auth-session";
 import { useEffect } from "react";
 import { storeData } from "../utils/storage";
@@ -90,35 +93,106 @@ const Login = ({ navigation }: any) => {
     }
   }, [response]);
 
+  const spinValue = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    spin();
+  }, []);
+
+  const spin = () => {
+    spinValue.setValue(0);
+    const randomSpeed = Math.random() * 3000 + 2000; //random duration from 2s to 5s
+    Animated.timing(spinValue, {
+      toValue: 1,
+      duration: randomSpeed,
+      easing: Easing.linear,
+      useNativeDriver: true,
+    }).start(spin);
+  };
+
+  const spinImage = spinValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: ["0deg", "360deg"],
+  });
+
   return (
     <View style={styles.containter}>
-      <TouchableOpacity onPress={() => promptAsync()}>
-        <View style={styles.loginButton}>
-          <Text style={styles.text}>Login with Spotify</Text>
-        </View>
-      </TouchableOpacity>
+      <View style={styles.fillerContainter}></View>
+      <View style={styles.halfContainter}>
+        <Animated.Image
+          source={{ uri: "https://i.ibb.co/JzVH0P2/vinyl.png" }}
+          style={[
+            styles.image,
+            {
+              transform: [{ rotate: spinImage }],
+              // width: 80,
+              // height: 80,
+              // maxWidth: 80,
+            },
+          ]}
+        />
+        <Image
+          source={{ uri: "https://i.ibb.co/jZY1sHg/logo.png" }}
+          style={styles.titleImage}
+        />
+      </View>
+      <View style={styles.loginContainter}>
+        <TouchableOpacity onPress={() => promptAsync()}>
+          <View style={styles.loginButton}>
+            <Text style={styles.text}>Login with Spotify</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   containter: {
-    flex: 1,
+    flex: 10,
     justifyContent: "center",
     alignItems: "center",
     paddingTop: StatusBar.currentHeight,
   },
+  halfContainter: {
+    flex: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loginContainter: {
+    flex: 4,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  fillerContainter: {
+    flex: 2,
+  },
   loginButton: {
-    backgroundColor: "green",
+    backgroundColor: "#1DB954",
     width: wWidth * 0.5,
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 10,
+    borderRadius: 50,
   },
   text: {
     color: "white",
     fontSize: 18,
+  },
+  title: {
+    color: "#1DB954",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+  titleImage: {
+    width: 254,
+    height: 94,
+    maxWidth: 254,
+  },
+  image: {
+    width: 180,
+    height: 180,
+    maxWidth: 180,
   },
 });
 
